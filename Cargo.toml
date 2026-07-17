@@ -25,12 +25,12 @@ authors = ["wickra-lib"]
 serde = { version = "1", features = ["derive"] }
 serde_json = { version = "1", features = ["preserve_order"] }
 thiserror = "2"
-sha2 = "0.10"
+sha2 = "0.11"
 handlebars = "6"
 clap = { version = "4", features = ["derive"] }
 wickra-backtest = { git = "https://github.com/wickra-lib/wickra-backtest", version = "0.1" }
 cbindgen = "0.27"
-criterion = "0.5"
+criterion = "0.8"
 proptest = "1"
 
 [workspace.lints.rust]
