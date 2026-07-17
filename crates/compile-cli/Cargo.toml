@@ -16,4 +16,7 @@ name = "wickra-compile"
 path = "src/main.rs"
 
 [dependencies]
+clap = { workspace = true }
+serde_json = { workspace = true }
+# `build` (default) makes the real cargo-invoking `compile` available to the CLI.
 compile-core = { path = "../compile-core", version = "0.1" }
