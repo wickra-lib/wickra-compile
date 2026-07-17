@@ -1,0 +1,16 @@
+{
+  "strategy": {
+    "symbol": "ethusdt",
+    "timeframe": "4h",
+    "indicators": {
+      "fast": { "type": "Ema", "params": [20] },
+      "slow": { "type": "Ema", "params": [50] }
+    },
+    "entry": { "cross_above": ["fast", "slow"] },
+    "exit": { "cross_below": ["fast", "slow"] },
+    "sizing": { "type": "fixed_fraction", "fraction": 0.95 }
+  },
+  "target": { "kind": "binary" },
+  "opt_level": "size",
+  "crate_name": "ema_trend"
+}

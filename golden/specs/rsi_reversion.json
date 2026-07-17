@@ -1,0 +1,15 @@
+{
+  "strategy": {
+    "symbol": "btcusdt",
+    "timeframe": "1h",
+    "indicators": {
+      "rsi": { "type": "Rsi", "params": [14] },
+      "mid": { "type": "Sma", "params": [20] }
+    },
+    "entry": { "cross_below": ["rsi", "mid"] },
+    "exit": { "cross_above": ["rsi", "mid"] },
+    "sizing": { "type": "fixed_qty", "qty": 2.0 }
+  },
+  "target": { "kind": "wasm" },
+  "crate_name": "rsi_reversion"
+}

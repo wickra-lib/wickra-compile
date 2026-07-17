@@ -1,0 +1,16 @@
+{
+  "strategy": {
+    "symbol": "btcusdt",
+    "timeframe": "1h",
+    "indicators": {
+      "fast": { "type": "Sma", "params": [5] },
+      "slow": { "type": "Sma", "params": [20] }
+    },
+    "entry": { "cross_above": ["fast", "slow"] },
+    "exit": { "cross_below": ["fast", "slow"] },
+    "sizing": { "type": "fixed_qty", "qty": 1.0 }
+  },
+  "target": { "kind": "binary" },
+  "embed_data": { "kind": "csv", "path": "golden/candles/BTCUSDT.csv" },
+  "crate_name": "binary_daemon"
+}
