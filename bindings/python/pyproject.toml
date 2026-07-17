@@ -1,0 +1,47 @@
+[build-system]
+requires = ["maturin>=1.7,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "wickra-compile"
+version = "0.1.0"
+description = "Compile a Wickra strategy spec into a standalone deployable (WASM, binary, or no_std) with a deterministic manifest."
+readme = "README.md"
+license = "MIT OR Apache-2.0"
+authors = [{ name = "kingchenc", email = "support@wickra.org" }]
+requires-python = ">=3.9"
+keywords = ["trading", "strategy", "compiler", "wasm", "codegen"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Rust",
+    "Topic :: Office/Business :: Financial :: Investment",
+    "Topic :: Scientific/Engineering",
+]
+dependencies = []
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[project.urls]
+Homepage = "https://github.com/wickra-lib/wickra-compile"
+Repository = "https://github.com/wickra-lib/wickra-compile"
+Issues = "https://github.com/wickra-lib/wickra-compile/issues"
+
+[tool.maturin]
+manifest-path = "Cargo.toml"
+python-source = "python"
+module-name = "wickra_compile._wickra_compile"
+features = ["pyo3/extension-module"]
+strip = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra -q"
