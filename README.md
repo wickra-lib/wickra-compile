@@ -5,9 +5,12 @@
 [![Built on Wickra](https://img.shields.io/badge/built%20on-wickra-3b82f6)](https://github.com/wickra-lib/wickra)
 [![Status](https://img.shields.io/badge/status-pre--release-orange)](https://github.com/wickra-lib/wickra-compile)
 [![CI](https://github.com/wickra-lib/wickra-compile/actions/workflows/ci.yml/badge.svg)](https://github.com/wickra-lib/wickra-compile/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/wickra-lib/wickra-compile/actions/workflows/codeql.yml/badge.svg)](https://github.com/wickra-lib/wickra-compile/actions/workflows/codeql.yml)
 [![License: MIT OR Apache-2.0](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue.svg)](#license)
 [![OpenSSF Scorecard](https://img.shields.io/badge/OpenSSF-Scorecard-3b82f6)](https://scorecard.dev/viewer/?uri=github.com/wickra-lib/wickra-compile)
+[![Deterministic across 10 languages](https://img.shields.io/badge/deterministic%20across-10%20languages-3b82f6)](#use-in-any-language)
 [![Deterministic manifest](https://img.shields.io/badge/manifest-deterministic-3b82f6)](#determinism)
+[![Docs](https://img.shields.io/badge/docs-wickra.org-3b82f6)](https://wickra.org)
 
 ---
 
@@ -31,9 +34,9 @@ list of files with their hashes plus the canonical spec hash — is
 
 ## Status
 
-Early development (0.1.0, unreleased). Built out in phases; this scaffold pins
-the repository, governance and supply-chain configuration ahead of the codegen
-core, the CLI, the ten language bindings and the golden harness.
+Early development (0.1.0, unreleased). The codegen core, the reference CLI, the
+ten-language binding surface, the golden corpus and the full CI matrix are in
+place; the first published release is still pending.
 
 ## How it works
 
@@ -57,6 +60,19 @@ manifest on every run and in every language binding. (The compiled *binary*
 bytes are only reproducible with a reproducible-build toolchain — that is
 best-effort and separate from the manifest guarantee.)
 
+## Quickstart
+
+```bash
+# Print the deterministic manifest for a strategy spec — no toolchain needed.
+wickra-compile --spec golden/specs/sma_cross.json --manifest
+
+# Generate the project without building it, then inspect it.
+wickra-compile --spec golden/specs/sma_cross.json --dry-run --out ./out
+
+# Retarget the same spec without editing it.
+wickra-compile --spec golden/specs/sma_cross.json --target wasm --opt size
+```
+
 ## Use in any language
 
 The same handle + `command_json` + `version` surface ships for Rust, Python,
@@ -64,12 +80,50 @@ Node.js, WASM, and — over a C ABI hub — C, C++, C#, Go, Java and R. Each bin
 passes the command string through verbatim, so the manifest they return is
 identical.
 
+```python
+import json
+from wickra_compile import Compiler
+
+spec = open("golden/specs/sma_cross.json").read()
+out = json.loads(Compiler().command(f'{{"cmd":"compile","dry_run":true,"spec":{spec}}}'))
+print(out["manifest"]["project_hash"])  # identical in every binding
+```
+
+See [`examples/`](examples/) for the same program in all ten languages.
+
+## Documentation
+
+- [ARCHITECTURE.md](docs/ARCHITECTURE.md) — the crates and the codegen pipeline.
+- [COMPILESPEC.md](docs/COMPILESPEC.md) — the input schema.
+- [TARGETS.md](docs/TARGETS.md) — WASM / binary / `no_std` and the MCU allowlist.
+- [DETERMINISM.md](docs/DETERMINISM.md) — why the manifest is reproducible.
+- [TEMPLATES.md](docs/TEMPLATES.md) — codegen and injection safety.
+- [Cookbook.md](docs/Cookbook.md) — practical recipes.
+
+## Project layout
+
+```
+crates/compile-core   the library: spec, canonical JSON, codegen, manifest
+crates/compile-cli    the wickra-compile CLI
+crates/compile-bench  criterion micro-benchmarks
+bindings/*            ten language surfaces (c, python, node, wasm, csharp, go, java, r)
+golden/               specs + blessed manifests (the cross-language corpus)
+examples/             one runnable example per language
+docs/                 architecture, spec, targets, determinism, templates, cookbook
+```
+
 ## Building from source
 
 ```bash
 cargo build
 cargo test
 ```
+
+## Benchmarks
+
+Codegen is pure data templating and hashing — tens of microseconds, no
+compilation. See [BENCHMARKS.md](BENCHMARKS.md); reproduce with
+`cargo bench -p compile-bench`.
 
 ## Requirements
 
@@ -85,6 +139,13 @@ specs.
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Disclaimer
+
+Wickra Compile is a code-generation tool, provided "as is" without warranty of
+any kind. It generates projects and can invoke `cargo` to build them — run it
+only on specs you trust. Nothing here is financial advice; compiled strategies
+are your responsibility, and trading carries risk of loss.
 
 ## License
 
