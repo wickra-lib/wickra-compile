@@ -1,0 +1,15 @@
+{
+  "strategy": {
+    "symbol": "x",
+    "timeframe": "1m",
+    "indicators": {
+      "f": { "type": "Ema", "params": [3] },
+      "s": { "type": "Ema", "params": [8] }
+    },
+    "entry": { "cross_above": ["f", "s"] },
+    "exit": { "cross_below": ["f", "s"] },
+    "sizing": { "type": "fixed_qty", "qty": 1.0 }
+  },
+  "target": { "kind": "no_std", "mcu": "thumbv7em-none-eabihf" },
+  "crate_name": "no_std_blink"
+}

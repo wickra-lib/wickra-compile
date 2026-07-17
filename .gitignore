@@ -1,6 +1,8 @@
 /target
 /fuzz/target
 /fuzz/Cargo.lock
+examples/*/target/
+examples/rust/Cargo.lock
 /_out
 bindings/go/lib/*/
 bindings/r/src/*.o
