@@ -1,0 +1,9 @@
+{
+  "name": "wickra-compile-example-node",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A runnable Node.js example for wickra-compile.",
+  "type": "commonjs",
+  "scripts": { "start": "node compile.js" },
+  "dependencies": { "wickra-compile": "^0.1.0" }
+}
