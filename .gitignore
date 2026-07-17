@@ -10,3 +10,4 @@ bindings/r/src/*.dll
 __pycache__
 bindings/wasm/pkg
 dist
+**/node_modules/
