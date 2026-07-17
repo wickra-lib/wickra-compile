@@ -1,0 +1,4 @@
+useDynLib(wickracompile, .registration = TRUE, .fixes = "C_")
+export(wkcompile_version)
+export(wkcompile_new)
+export(wkcompile_command)

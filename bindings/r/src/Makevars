@@ -1,0 +1,7 @@
+# The wickra-compile C ABI header and library are provided out-of-tree via
+# the WKCOMPILE_INC (include dir) and WKCOMPILE_LIB (library dir)
+# environment variables, set by CI / the installer. The Makevars do not bake an
+# rpath; the loader must find the shared library via LD_LIBRARY_PATH /
+# DYLD_LIBRARY_PATH at run time.
+PKG_CPPFLAGS = -I$(WKCOMPILE_INC)
+PKG_LIBS = -L$(WKCOMPILE_LIB) -lwickra_compile

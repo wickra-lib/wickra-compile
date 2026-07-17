@@ -1,0 +1,16 @@
+Package: wickracompile
+Type: Package
+Title: Compile a Wickra Strategy Spec to a Standalone Deployable
+Version: 0.1.0
+Authors@R: person("kingchenc", role = c("aut", "cre"), email = "support@wickra.org")
+Description: R bindings for wickra-compile over its C ABI hub: a strategy spec
+    is compiled into a standalone deployable and a byte-identical manifest -
+    the same protocol as the CLI and every other binding.
+License: MIT + file LICENSE | Apache License 2.0
+URL: https://github.com/wickra-lib/wickra-compile
+BugReports: https://github.com/wickra-lib/wickra-compile/issues
+Encoding: UTF-8
+NeedsCompilation: yes
+SystemRequirements: the wickra-compile C ABI shared library (WKCOMPILE_LIB)
+    and its header (WKCOMPILE_INC).
+RoxygenNote: 7.3.2
