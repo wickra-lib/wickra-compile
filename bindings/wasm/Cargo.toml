@@ -1,16 +1,33 @@
 [package]
 name = "compile-wasm"
-description = "wasm binding for wickra-compile (scaffold stub)."
+description = "WebAssembly bindings for wickra-compile — compile a strategy spec to a deterministic manifest in the browser."
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
 repository.workspace = true
 authors.workspace = true
+readme = "README.md"
 publish = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+# Modern rustc emits a wasm feature set (bulk-memory, sign-ext, …) that the
+# wasm-opt bundled with wasm-pack is too old to validate. The wasm-bindgen output
+# is already valid and functional; skip the optional size-only optimizer pass.
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = false
 
 [lints]
 workspace = true
 
 [dependencies]
-compile-core = { path = "../../crates/compile-core", version = "0.1" }
+# The codegen core as a direct path dep (not `workspace = true`) so
+# `default-features = false` is honored — cargo silently ignores it on an
+# inherited workspace dependency. Default features off means the `build` feature
+# (which shells out to `cargo`) is disabled: a browser cannot run a toolchain, so
+# pure codegen + the deterministic manifest is all that is exposed. A real build
+# (`compile` with `dry_run: false`) comes back as an in-band error instead.
+compile-core = { path = "../../crates/compile-core", version = "0.1", default-features = false }
+wasm-bindgen = "0.2"
