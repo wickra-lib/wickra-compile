@@ -1,0 +1,19 @@
+[package]
+name = "wickra-compile"
+description = "CLI for wickra-compile: turn a strategy spec into a standalone deployable (WASM, binary, or no_std)."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[lints]
+workspace = true
+
+[[bin]]
+name = "wickra-compile"
+path = "src/main.rs"
+
+[dependencies]
+compile-core = { path = "../compile-core", version = "0.1" }

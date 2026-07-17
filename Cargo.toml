@@ -1,0 +1,47 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/compile-core",
+    "crates/compile-cli",
+    "crates/compile-bench",
+    "bindings/c",
+    "bindings/python",
+    "bindings/node",
+    "bindings/wasm",
+]
+# The fuzz crate is its own (detached) workspace — cargo-fuzz builds it on a
+# nightly toolchain with sanitizer flags.
+exclude = ["fuzz"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.86"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/wickra-lib/wickra-compile"
+authors = ["wickra-lib"]
+
+[workspace.dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["preserve_order"] }
+thiserror = "2"
+sha2 = "0.10"
+handlebars = "6"
+clap = { version = "4", features = ["derive"] }
+wickra-backtest = { git = "https://github.com/wickra-lib/wickra-backtest", version = "0.1" }
+cbindgen = "0.27"
+criterion = "0.5"
+proptest = "1"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+
+[profile.release]
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true

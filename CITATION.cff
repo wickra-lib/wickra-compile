@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "wickra-compile"
+abstract: >-
+  A deterministic multi-symbol feature store built on the Wickra core: a
+  data-driven FeatureSpec is folded over each symbol's history with 514 O(1)
+  streaming indicators, labels are joined over a forward horizon, and the result
+  is materialized as a feature matrix, exposed as a JSON-over-C-ABI data API in
+  ten languages.
+type: software
+authors:
+  - alias: kingchenc
+    website: "https://wickra.org"
+repository-code: "https://github.com/wickra-lib/wickra-compile"
+url: "https://wickra.org"
+license:
+  - MIT
+  - Apache-2.0
+keywords:
+  - trading
+  - features
+  - indicators
+  - streaming
+  - finance
