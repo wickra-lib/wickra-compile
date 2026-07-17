@@ -152,6 +152,7 @@ name = "compile-c"
 version = "0.1.0"
 dependencies = [
  "compile-core",
+ "serde_json",
 ]
 
 [[package]]
