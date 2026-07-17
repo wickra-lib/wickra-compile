@@ -6,8 +6,15 @@ bindings/go/lib/*/
 bindings/r/src/*.o
 bindings/r/src/*.so
 bindings/r/src/*.dll
+bindings/r/.rlib/
+bindings/r/..Rcheck/
 **/*.node
 __pycache__
 bindings/wasm/pkg
 dist
 **/node_modules/
+# .NET build artifacts
+bin/
+obj/
+# Java build artifacts
+bindings/java/target/
