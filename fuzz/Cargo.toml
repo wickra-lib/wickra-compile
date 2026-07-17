@@ -1,0 +1,47 @@
+[package]
+name = "wickra-compile-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2021"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+serde_json = "1"
+# The codegen core under test. Default features off so the fuzzers exercise pure
+# codegen (no `build` feature, i.e. no cargo invocation).
+compile-core = { path = "../crates/compile-core", default-features = false }
+
+# Detach from the parent workspace — cargo-fuzz builds this crate on its own with
+# sanitizer flags on a nightly toolchain.
+[workspace]
+
+[[bin]]
+name = "spec_parse"
+path = "fuzz_targets/spec_parse.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "canonical_hash"
+path = "fuzz_targets/canonical_hash.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "codegen"
+path = "fuzz_targets/codegen.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "target_parse"
+path = "fuzz_targets/target_parse.rs"
+test = false
+doc = false
+bench = false
