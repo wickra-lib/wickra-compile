@@ -11,4 +11,21 @@ authors.workspace = true
 [lints]
 workspace = true
 
+[features]
+default = ["build"]
+# `build` unlocks builder.rs, which invokes `cargo` on the generated project.
+# Pure codegen + manifest (the golden path) needs no toolchain and no `build`.
+build = []
+
 [dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+toml = "0.8"
+thiserror = { workspace = true }
+sha2 = { workspace = true }
+# The StrategySpec source of truth: the compiler treats the strategy as opaque
+# JSON and only round-trips it through this type to prove it is valid.
+wickra-backtest = { workspace = true }
+
+[dev-dependencies]
+proptest = { workspace = true }
