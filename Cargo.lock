@@ -1223,9 +1223,9 @@ dependencies = [
 
 [[package]]
 name = "toml"
-version = "1.1.2+spec-1.1.0"
+version = "1.1.3+spec-1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "81f3d15e84cbcd896376e6730314d59fb5a87f31e4b038454184435cd57defee"
+checksum = "53c96ecdfa941c8fc4fcaed14f99ada8ebed502eef533015095a07e3301d4c3c"
 dependencies = [
  "indexmap",
  "serde_core",
@@ -1376,7 +1376,7 @@ dependencies = [
 [[package]]
 name = "wickra-backtest"
 version = "0.1.0"
-source = "git+https://github.com/wickra-lib/wickra-backtest#7bd8897c7fa95f2a05f93f1e13c4dbad39ddd278"
+source = "git+https://github.com/wickra-lib/wickra-backtest#bef35acfefb0c1170812cc27bca58df6d548cff8"
 dependencies = [
  "wickra-backtest-core",
  "wickra-backtest-data",
@@ -1385,7 +1385,7 @@ dependencies = [
 [[package]]
 name = "wickra-backtest-core"
 version = "0.1.0"
-source = "git+https://github.com/wickra-lib/wickra-backtest#7bd8897c7fa95f2a05f93f1e13c4dbad39ddd278"
+source = "git+https://github.com/wickra-lib/wickra-backtest#bef35acfefb0c1170812cc27bca58df6d548cff8"
 dependencies = [
  "schemars",
  "serde",
@@ -1397,7 +1397,7 @@ dependencies = [
 [[package]]
 name = "wickra-backtest-data"
 version = "0.1.0"
-source = "git+https://github.com/wickra-lib/wickra-backtest#7bd8897c7fa95f2a05f93f1e13c4dbad39ddd278"
+source = "git+https://github.com/wickra-lib/wickra-backtest#bef35acfefb0c1170812cc27bca58df6d548cff8"
 dependencies = [
  "serde_json",
  "wickra-backtest-core",
