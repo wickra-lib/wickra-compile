@@ -31,7 +31,7 @@
 self-contained binary, or a `no_std` artifact for microcontrollers. Write once
 as data, deploy anywhere.**
 
-> **Part of the [Wickra ecosystem](https://github.com/wickra-lib):** it takes the
+> **Part of the [Wickra ecosystem](https://github.com/wickra-lib):** the same data-driven core and ten-language binding surface also power [wickra-exchange](https://github.com/wickra-lib/wickra-exchange), [wickra-backtest](https://github.com/wickra-lib/wickra-backtest), [wickra-terminal](https://github.com/wickra-lib/wickra-terminal) and 20 more — see [the full list](https://github.com/wickra-lib).
 > same [`StrategySpec`](https://github.com/wickra-lib/wickra-backtest) that
 > `wickra-backtest` runs and emits a self-contained project that embeds the spec
 > and calls the Wickra engine — no interpreter, no runtime spec parsing.
