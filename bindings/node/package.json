@@ -41,5 +41,5 @@
     "version": "napi version",
     "test": "node --test"
   },
-  "devDependencies": { "@napi-rs/cli": "^3.7.4" }
+  "devDependencies": { "@napi-rs/cli": "^3.8.6" }
 }
