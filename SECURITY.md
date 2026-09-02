@@ -2,12 +2,12 @@
 
 ## Supported versions
 
-Wickra Compile is pre-1.0; only the latest `0.x` release line receives security
-fixes.
+Wickra Compile is pre-1.0; only the latest release receives security
+fixes. That is `0.1.0`, the version the manifests declare.
 
 | Version | Supported |
 |---------|-----------|
-| 0.1.x   | ✅        |
+| `0.1.0` (latest) | ✅ |
 
 ## Reporting a vulnerability
 

@@ -1386,8 +1386,8 @@ dependencies = [
 
 [[package]]
 name = "wickra-backtest"
-version = "0.1.0"
-source = "git+https://github.com/wickra-lib/wickra-backtest#bd50f9733f875bf839ba5ac06b79ca7147d0f104"
+version = "0.1.2"
+source = "git+https://github.com/wickra-lib/wickra-backtest#ad4de9405ebae37c7d0c6f971edf360dbeb8cfb3"
 dependencies = [
  "wickra-backtest-core",
  "wickra-backtest-data",
@@ -1395,8 +1395,8 @@ dependencies = [
 
 [[package]]
 name = "wickra-backtest-core"
-version = "0.1.0"
-source = "git+https://github.com/wickra-lib/wickra-backtest#bd50f9733f875bf839ba5ac06b79ca7147d0f104"
+version = "0.1.2"
+source = "git+https://github.com/wickra-lib/wickra-backtest#ad4de9405ebae37c7d0c6f971edf360dbeb8cfb3"
 dependencies = [
  "schemars",
  "serde",
@@ -1407,8 +1407,8 @@ dependencies = [
 
 [[package]]
 name = "wickra-backtest-data"
-version = "0.1.0"
-source = "git+https://github.com/wickra-lib/wickra-backtest#bd50f9733f875bf839ba5ac06b79ca7147d0f104"
+version = "0.1.2"
+source = "git+https://github.com/wickra-lib/wickra-backtest#ad4de9405ebae37c7d0c6f971edf360dbeb8cfb3"
 dependencies = [
  "serde_json",
  "wickra-backtest-core",
@@ -1426,9 +1426,9 @@ dependencies = [
 
 [[package]]
 name = "wickra-core"
-version = "0.9.9"
+version = "1.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7cf4e7af4f00596d9bd33c66a9aaf935687959dd14d063b8b7d7d749e102680e"
+checksum = "3801b8e584405b19c5db178a8aae4587250a27daf26397ce3bde9e4c0badb115"
 dependencies = [
  "rayon",
  "thiserror",
