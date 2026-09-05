@@ -1,3 +1,7 @@
+<p align="center">
+  <a href="https://wickra.org"><img src="https://raw.githubusercontent.com/wickra-lib/.github/main/profile/wickra-banner.webp?v=514" alt="Wickra Compile — compile a strategy spec into a standalone deployable" width="100%"></a>
+</p>
+
 # Wickra Compile — Go
 
 Go bindings for the Wickra strategy compiler over its C ABI hub via cgo. A
