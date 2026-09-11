@@ -3,7 +3,7 @@
 The C ABI hub for `wickra-compile`: a tiny, JSON-shaped surface that every
 C-capable language (C, C++, C#, Go, Java, R) links against. It exposes an opaque
 handle plus a `command(json) -> json` entry point mirroring
-[`compile_core::Compiler::command_json`].
+[`wickra_compile_core::Compiler::command_json`].
 
 ## Surface
 

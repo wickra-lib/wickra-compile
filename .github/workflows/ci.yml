@@ -409,11 +409,11 @@ jobs:
         uses: taiki-e/install-action@3d7d7cd5ac7f994c1892ae0c06165095b9139094 # v2.85.1
         with:
           tool: cargo-llvm-cov
-      # The determinism moat lives in compile-core: canonical JSON, the codegen
+      # The determinism moat lives in wickra-compile-core: canonical JSON, the codegen
       # templates, spec hashing and the manifest. Measure it in isolation so
       # patch coverage tracks the core.
       - name: Generate coverage (lcov)
-        run: cargo llvm-cov -p compile-core --all-features --lcov --output-path lcov.info
+        run: cargo llvm-cov -p wickra-compile-core --all-features --lcov --output-path lcov.info
       - name: Upload to Codecov
         uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v7.0.0
         with:

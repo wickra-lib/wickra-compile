@@ -11,7 +11,7 @@
 
 use pyo3::prelude::*;
 
-use compile_core::Compiler;
+use wickra_compile_core::Compiler;
 
 /// A compiler driven by JSON commands.
 ///
@@ -43,7 +43,7 @@ impl PyCompiler {
     /// The library version.
     #[staticmethod]
     fn version() -> &'static str {
-        compile_core::version()
+        wickra_compile_core::version()
     }
 }
 

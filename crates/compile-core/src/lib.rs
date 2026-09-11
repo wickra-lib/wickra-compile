@@ -8,7 +8,7 @@
 //! command string through verbatim.
 //!
 //! ```
-//! use compile_core::{generate, CompileSpec};
+//! use wickra_compile_core::{generate, CompileSpec};
 //! let spec: CompileSpec = serde_json::from_str(r#"{
 //!     "strategy": { "symbol": "x", "timeframe": "1h",
 //!         "indicators": { "f": { "type": "Ema", "params": [3] } },

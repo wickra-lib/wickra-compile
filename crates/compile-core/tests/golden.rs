@@ -7,7 +7,7 @@
 use std::fs;
 use std::path::PathBuf;
 
-use compile_core::{manifest_of, CompileSpec};
+use wickra_compile_core::{manifest_of, CompileSpec};
 
 fn golden_dir() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../golden")

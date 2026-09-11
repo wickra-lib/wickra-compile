@@ -14,7 +14,7 @@ language binding.
 | `crates/compile-bench` | Criterion benchmarks for `generate` / `spec_hash` / `project_hash`. |
 | `bindings/{c,python,node,wasm}` | The language surface (C ABI hub + native bindings); C, C++, C#, Go, Java and R ride the C ABI. Each passes the `command_json` string through verbatim. |
 
-The binding crates depend on `compile-core` by path (with an explicit version so
+The binding crates depend on `wickra-compile-core` by path (with an explicit version so
 they are not wildcard-path dependencies). The `fuzz` crate is a detached
 workspace built by `cargo-fuzz` on nightly.
 

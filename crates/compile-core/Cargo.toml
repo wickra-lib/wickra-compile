@@ -1,5 +1,5 @@
 [package]
-name = "compile-core"
+name = "wickra-compile-core"
 description = "Codegen core: compile a Wickra strategy spec into a standalone deployable with a deterministic manifest."
 version.workspace = true
 edition.workspace = true

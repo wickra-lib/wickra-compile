@@ -38,7 +38,7 @@ absolute path, no RNG, no host detail anywhere in it.
 
 ## Cross-language byte-equality
 
-The whole compiler lives once, in `compile-core`. Every binding calls
+The whole compiler lives once, in `wickra-compile-core`. Every binding calls
 `command_json` and returns its result **string verbatim** — no per-language JSON
 re-encode, no deep-equal, no hash reformat. Because the response is the same
 bytes and the manifest inside it carries no ambient state, `project_hash` is

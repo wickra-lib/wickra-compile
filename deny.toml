@@ -25,7 +25,7 @@ confidence-threshold = 0.93
 [bans]
 multiple-versions = "warn"
 wildcards = "deny"
-# Internal path dependencies (the binding crates depend on compile-core by path)
+# Internal path dependencies (the binding crates depend on wickra-compile-core by path)
 # carry an explicit version, so they are not wildcard paths.
 
 [sources]

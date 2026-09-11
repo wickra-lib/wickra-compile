@@ -3,7 +3,7 @@
 use std::fs;
 use std::path::Path;
 
-use compile_core::{compile, generate, manifest_of, CompileSpec, Manifest, Target};
+use wickra_compile_core::{compile, generate, manifest_of, CompileSpec, Manifest, Target};
 
 use crate::args::{Args, TargetArg};
 

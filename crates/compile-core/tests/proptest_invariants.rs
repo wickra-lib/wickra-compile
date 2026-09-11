@@ -2,9 +2,9 @@
 //! and never emits an unsafe path, MCUs outside the allowlist are always
 //! rejected, and a resolved crate name is always a valid Rust identifier.
 
-use compile_core::{generate, CompileSpec, Error, OptLevel, Target, MCU_ALLOWLIST};
 use proptest::prelude::*;
 use serde_json::{json, Value};
+use wickra_compile_core::{generate, CompileSpec, Error, OptLevel, Target, MCU_ALLOWLIST};
 
 fn strategy() -> Value {
     json!({

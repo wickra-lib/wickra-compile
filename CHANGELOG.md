@@ -7,14 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **The core crate carried a name the release could not upload.**
+  `compile-core` is outside the org's crates.io token scope, which creates new
+  crates under the `wickra-` prefix only; `cargo publish` on it returns 403 at
+  upload while `--dry-run` passes, and because the publish jobs run in
+  parallel the release would have landed on PyPI, npm, NuGet, Maven Central
+  and the Go mirror without ever reaching crates.io. The core is now
+  `wickra-compile-core`, the shape of every released sibling. The directory
+  keeps its name; only the package and the `wickra_compile_core` path moved.
+  The same audit ran across the family (xray paid for this with its first
+  tag).
+
+- **`release.yml` copied the CLI's SBOM from a directory that does not
+  exist.** It read `crates/synth-cli/wickra-compile.cdx.json`, a path carried
+  over from the repository it was templated from; the crate lives in
+  `crates/compile-cli/`. The `cp` sits after both uploads, so the job would
+  have failed with the crates already published and no `.crate` or SBOM
+  attached to the GitHub Release.
+
 ### Added
 
 - Repository scaffold: governance, supply-chain configuration (`deny.toml`,
   `lychee.toml`, `osv-scanner.toml`, `repo-metadata.toml`), the Rust workspace
-  (`compile-core`, `compile-cli`, `compile-bench`) with the language-binding
+  (`wickra-compile-core`, `compile-cli`, `compile-bench`) with the language-binding
   crates, and the `wickra-backtest` git dependency (the `StrategySpec` source of
   truth embedded into generated projects).
-- `compile-core`: the codegen library — the `CompileSpec` model, canonical JSON,
+- `wickra-compile-core`: the codegen library — the `CompileSpec` model, canonical JSON,
   the codegen templates, spec/project hashing, the deterministic `Manifest`, and
   the optional `cargo` build driver behind the `build` feature.
 - `wickra-compile` CLI: load a spec, override `--target` / `--opt` / `--mcu`,

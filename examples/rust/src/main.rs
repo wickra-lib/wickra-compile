@@ -6,7 +6,7 @@
 //! cargo run --manifest-path examples/rust/Cargo.toml
 //! ```
 
-use compile_core::{manifest_of, CompileSpec};
+use wickra_compile_core::{manifest_of, CompileSpec};
 
 const SPEC: &str = r#"{
     "strategy": {
@@ -28,7 +28,7 @@ fn main() {
     let spec = CompileSpec::from_json(SPEC).expect("valid spec");
     let manifest = manifest_of(&spec).expect("manifest");
 
-    println!("wickra-compile {}", compile_core::version());
+    println!("wickra-compile {}", wickra_compile_core::version());
     println!("crate: {}", manifest.crate_name);
     println!("files: {}", manifest.files.len());
     println!("project_hash: {}", manifest.project_hash);

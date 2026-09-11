@@ -2,8 +2,8 @@
 //! variant round-trips through JSON unchanged, `spec_hash` is stable, and the
 //! documented error paths (bad MCU, bad crate name) actually reject.
 
-use compile_core::{spec_hash, CompileSpec, DatasetRef, Error, OptLevel, Target};
 use serde_json::{json, Value};
+use wickra_compile_core::{spec_hash, CompileSpec, DatasetRef, Error, OptLevel, Target};
 
 fn sample_strategy() -> Value {
     json!({

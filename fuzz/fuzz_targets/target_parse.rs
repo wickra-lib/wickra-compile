@@ -3,7 +3,7 @@
 //! `Target` never panics, round-trips when it parses, and `validate_mcu` on a
 //! `no_std` triple is total (only allowlisted triples are accepted).
 
-use compile_core::{validate_mcu, Target, MCU_ALLOWLIST};
+use wickra_compile_core::{validate_mcu, Target, MCU_ALLOWLIST};
 use libfuzzer_sys::fuzz_target;
 
 fuzz_target!(|data: &[u8]| {

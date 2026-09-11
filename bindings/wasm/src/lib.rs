@@ -5,7 +5,7 @@
 //! command protocol crosses every binding, so a browser front-end gets the
 //! byte-identical manifest as the native CLI.
 //!
-//! `compile-core` is pulled in with `default-features = false`, so its `build`
+//! `wickra-compile-core` is pulled in with `default-features = false`, so its `build`
 //! feature — which shells out to `cargo` — is off: a browser cannot run a
 //! toolchain. Pure codegen and the deterministic manifest (`compile` with
 //! `dry_run: true`, plus `targets` and `version`) work fully; a real build
@@ -18,7 +18,7 @@
 
 use wasm_bindgen::prelude::*;
 
-use compile_core::Compiler as CoreCompiler;
+use wickra_compile_core::Compiler as CoreCompiler;
 
 /// A compiler driven by JSON commands.
 #[wasm_bindgen]
@@ -49,7 +49,7 @@ impl Compiler {
     #[wasm_bindgen(js_name = version)]
     #[must_use]
     pub fn instance_version(&self) -> String {
-        compile_core::version().to_owned()
+        wickra_compile_core::version().to_owned()
     }
 }
 
@@ -57,5 +57,5 @@ impl Compiler {
 #[wasm_bindgen]
 #[must_use]
 pub fn version() -> String {
-    compile_core::version().to_owned()
+    wickra_compile_core::version().to_owned()
 }

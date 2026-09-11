@@ -3,7 +3,7 @@
 use std::path::PathBuf;
 
 use clap::{Parser, ValueEnum};
-use compile_core::OptLevel;
+use wickra_compile_core::OptLevel;
 
 /// Compile a Wickra strategy spec into a standalone deployable.
 #[derive(Parser, Debug)]
