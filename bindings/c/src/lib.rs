@@ -1,6 +1,6 @@
 //! The wickra-compile C ABI — the hub every C-capable language links against.
 //!
-//! The surface is tiny and JSON-shaped, exactly like [`compile_core::Compiler`]:
+//! The surface is tiny and JSON-shaped, exactly like [`wickra_compile_core::Compiler`]:
 //! construct a handle, drive it with command JSONs (`compile`, `targets`,
 //! `version`, `artifact_bytes`, `reset`), read back response JSONs, and free the
 //! handle. No compile type crosses the boundary by value — the handle is opaque
@@ -22,7 +22,7 @@ use core::ffi::{c_char, CStr};
 use std::panic::{catch_unwind, AssertUnwindSafe};
 use std::ptr;
 
-use compile_core::Compiler;
+use wickra_compile_core::Compiler;
 
 /// A required pointer argument (`handle` or `cmd_json`) was null.
 pub const WICKRA_COMPILE_ERR_NULL: i32 = -1;

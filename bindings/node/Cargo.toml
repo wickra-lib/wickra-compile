@@ -28,7 +28,7 @@ new_without_default = "allow"
 
 [dependencies]
 # The codegen core with the default `build` feature (native → real cargo builds).
-compile-core = { path = "../../crates/compile-core", version = "0.1" }
+wickra-compile-core = { path = "../../crates/compile-core", version = "0.1" }
 napi = { version = "3.9", features = ["napi8"] }
 napi-derive = "3.5"
 

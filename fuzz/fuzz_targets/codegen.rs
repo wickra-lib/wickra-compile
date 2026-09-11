@@ -4,7 +4,7 @@
 //! references or absolute prefixes — the path-traversal guarantee from the
 //! threat model.
 
-use compile_core::{generate, CompileSpec};
+use wickra_compile_core::{generate, CompileSpec};
 use libfuzzer_sys::fuzz_target;
 
 fuzz_target!(|data: &[u8]| {

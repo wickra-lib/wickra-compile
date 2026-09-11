@@ -4,7 +4,7 @@
 //! canonicalised value back through must produce the identical string, which is
 //! the property the deterministic hashing relies on.
 
-use compile_core::{canonical_json, sha256_hex};
+use wickra_compile_core::{canonical_json, sha256_hex};
 use libfuzzer_sys::fuzz_target;
 use serde_json::Value;
 

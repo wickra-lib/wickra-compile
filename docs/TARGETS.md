@@ -49,7 +49,7 @@ The compiler accepts exactly these seven MCU triples:
 | `riscv32imac-unknown-none-elf` | RV32IMAC |
 
 Any other triple is rejected during validation. The allowlist is the single
-source of truth (`MCU_ALLOWLIST` in `compile-core`); the `targets` command
+source of truth (`MCU_ALLOWLIST` in `wickra-compile-core`); the `targets` command
 returns it at runtime.
 
 ## Overriding the target

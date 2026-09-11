@@ -3,13 +3,13 @@
 Wickra Compile turns a strategy **spec** (data) into a standalone deployable
 project, and reports a deterministic **manifest** describing exactly what it
 generated. Everything that matters for reproducibility lives in one Rust crate,
-`compile-core`; every other component is a thin shell around it.
+`wickra-compile-core`; every other component is a thin shell around it.
 
 ## Crates
 
 | Crate | Role |
 |-------|------|
-| `compile-core` | The library: spec model, canonical JSON, codegen templates, hashing, the manifest, and the optional `cargo` build driver. |
+| `wickra-compile-core` | The library: spec model, canonical JSON, codegen templates, hashing, the manifest, and the optional `cargo` build driver. |
 | `compile-cli` (`wickra-compile`) | The reference command-line tool: load a spec, override the target, print the manifest, dry-run, or build. |
 | `compile-bench` | Criterion micro-benchmarks for the hot paths (`spec_hash`, `generate`, `project_hash`). |
 | `bindings/*` | The ten language surfaces (Rust, Python, Node.js, WASM natively; C, C++, C#, Go, Java, R over the C ABI hub). |

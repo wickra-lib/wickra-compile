@@ -8,14 +8,14 @@ use napi_derive::napi;
 
 /// A compiler driven by JSON commands.
 #[napi]
-pub struct Compiler(compile_core::Compiler);
+pub struct Compiler(wickra_compile_core::Compiler);
 
 #[napi]
 impl Compiler {
     /// Construct a compiler handle.
     #[napi(constructor)]
     pub fn new() -> Self {
-        Compiler(compile_core::Compiler::new())
+        Compiler(wickra_compile_core::Compiler::new())
     }
 
     /// Apply a command envelope (`{"cmd":"...", ...}`) and return the response
@@ -29,6 +29,6 @@ impl Compiler {
     /// The crate version.
     #[napi]
     pub fn version(&self) -> &'static str {
-        compile_core::version()
+        wickra_compile_core::version()
     }
 }

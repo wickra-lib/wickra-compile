@@ -3,7 +3,7 @@
 //! keys — the classic source of accidental hash drift — must not change either
 //! hash.
 
-use compile_core::{manifest_of, spec_hash, CompileSpec};
+use wickra_compile_core::{manifest_of, spec_hash, CompileSpec};
 
 /// The same spec, written with three different object-key orderings. A canonical
 /// hash must treat all three as identical.

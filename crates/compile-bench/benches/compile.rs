@@ -3,9 +3,9 @@
 //! `compile` (an actual `cargo` build) is deliberately not benchmarked — it is
 //! too slow and too environment-dependent for CI.
 
-use compile_core::{generate, manifest_of, project_hash, spec_hash, CompileSpec, Target};
 use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
 use serde_json::json;
+use wickra_compile_core::{generate, manifest_of, project_hash, spec_hash, CompileSpec, Target};
 
 fn spec(target: Target) -> CompileSpec {
     CompileSpec {
@@ -21,7 +21,7 @@ fn spec(target: Target) -> CompileSpec {
             "sizing": { "type": "fixed_qty", "qty": 1 }
         }),
         target,
-        opt_level: compile_core::OptLevel::Release,
+        opt_level: wickra_compile_core::OptLevel::Release,
         embed_data: None,
         crate_name: Some("bench".to_owned()),
     }

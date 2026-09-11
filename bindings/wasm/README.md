@@ -60,7 +60,7 @@ in-band as `{"ok":false,"error":...}` (the response JSON), not thrown.
 
 ## No toolchain in the browser
 
-This binding links `compile-core` with its `build` feature **off** — a browser
+This binding links `wickra-compile-core` with its `build` feature **off** — a browser
 sandbox cannot shell out to `cargo`. Pure codegen and the deterministic manifest
 (`compile` with `dry_run: true`, plus `targets` and `version`) work fully. A real
 build (`compile` with `dry_run: false`) returns an in-band error, because there
