@@ -45,12 +45,17 @@ project_hash <- function(json) {
 
 slurp <- function(path) readChar(path, file.info(path)$size)
 
+## CI runs this from the repository root and a developer from bindings/r, so
+## the corpus is looked for upward from the working directory.
 golden <- NULL
-for (candidate in c("../../golden", "../../../golden")) {
-  if (dir.exists(candidate)) {
+d <- normalizePath(getwd(), mustWork = FALSE)
+for (i in seq_len(8)) {
+  candidate <- file.path(d, "golden")
+  if (dir.exists(file.path(candidate, "specs"))) {
     golden <- candidate
     break
   }
+  d <- dirname(d)
 }
 stopifnot(!is.null(golden))
 
