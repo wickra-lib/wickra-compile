@@ -8,6 +8,7 @@ members = [
     "bindings/python",
     "bindings/node",
     "bindings/wasm",
+    "examples/rust",
 ]
 # The fuzz crate is its own (detached) workspace — cargo-fuzz builds it on a
 # nightly toolchain with sanitizer flags.
@@ -22,15 +23,24 @@ repository = "https://github.com/wickra-lib/wickra-compile"
 authors = ["wickra-lib"]
 
 [workspace.dependencies]
+# Workspace-internal crate, referenced by the CLI, bench, example and bindings.
+wickra-compile-core = { version = "0.1.0", path = "crates/compile-core" }
 serde = { version = "1", features = ["derive"] }
 serde_json = { version = "1", features = ["preserve_order"] }
 thiserror = "2"
 sha2 = "0.11"
 handlebars = "6"
 clap = { version = "4", features = ["derive"] }
-wickra-backtest = { git = "https://github.com/wickra-lib/wickra-backtest", version = "0.1" }
+# The engine the compiler validates a StrategySpec against, from crates.io and
+# pinned exactly, as the released siblings pin it: a newer patch on one side
+# must not leave two copies of the engine in one graph.
+wickra-backtest = "=0.1.5"
 cbindgen = "0.27"
-criterion = "0.8"
+# codspeed-criterion-compat is a drop-in for criterion: the benches keep their
+# criterion API and run as criterion locally, but under `cargo codspeed` they
+# report measurements instead of merely executing. Without the alias the
+# CodSpeed job runs the benchmarks and uploads nothing, which reads as a pass.
+criterion = { package = "codspeed-criterion-compat", version = "5.0.1" }
 proptest = "1"
 
 [workspace.lints.rust]

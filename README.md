@@ -43,11 +43,19 @@ targets WASM, a native binary, or bare metal. The generated **manifest** — the
 list of files with their hashes plus the canonical spec hash — is
 **byte-identical across all ten language bindings** and reproducible across runs.
 
+```bash
+# Print the deterministic manifest for a strategy spec — no toolchain needed.
+cargo run -p wickra-compile -- --spec golden/specs/sma_cross.json --manifest
+
+# Generate the project without building it, then inspect it.
+cargo run -p wickra-compile -- --spec golden/specs/sma_cross.json --dry-run --out ./out
+```
+
 ## Status
 
-Early development (0.1.0, unreleased). The codegen core, the reference CLI, the
+Early development (0.1.0). The codegen core, the reference CLI, the
 ten-language binding surface, the golden corpus and the full CI matrix are in
-place; the first published release is still pending.
+place; 0.1.0 is the first published release.
 
 ## How it works
 
@@ -123,12 +131,45 @@ examples/             one runnable example per language
 docs/                 architecture, spec, targets, determinism, templates, cookbook
 ```
 
-## Building from source
+## Building everything from source
 
 ```bash
-cargo build
-cargo test
+cargo build --workspace
+cargo test  --workspace --all-features
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+cargo run -p wickra-compile -- --spec golden/specs/sma_cross.json --manifest
 ```
+
+Each binding builds from its own directory — see the per-binding READMEs under
+`bindings/`. The operating-mode test builds the generated `no_std` project for
+real, so `rustup target add thumbv7em-none-eabihf` before `cargo test`.
+
+## Testing
+
+Run the suites with the commands in
+[Building everything from source](#building-everything-from-source).
+
+- **`wickra-compile-core`** — unit tests per template and target, canonical
+  determinism (a spec in any key order hashes the same), property tests over
+  specs and the command envelope, and the operating-mode check: the manifest a
+  dry run describes is the manifest a real build builds (the `no_std` project,
+  which has no dependencies and compiles in seconds). The golden fixtures in
+  `golden/` are the anchor: every spec must produce the same manifest bytes
+  here as in every binding.
+- **Every binding** asserts the *same* golden manifest and the same
+  operating-mode equivalence (the WASM build, which carries no toolchain,
+  checks key-order independence instead of a real build). That is the whole
+  cross-language claim, so it is checked the same way in each one rather than
+  approximated per language: Python with pytest (and a plain runner on 3.9),
+  Node with `node --test`, WASM through the nodejs build, C and C++ through
+  `ctest`, C# with `dotnet test`, Go with `go test`, Java with JUnit, and R
+  with the shipped `tests/smoke.R` plus the repository's `run_tests.R`.
+- **Examples** — every example under `examples/` runs in CI and is held to the
+  version and the `project_hash` it prints.
+- **Real builds** — the nightly build-targets job cross-compiles a generated
+  project per target family (wasm32, thumbv7em) with the CLI.
+- **Fuzz** — `fuzz/` holds libFuzzer targets over spec and target parsing, the
+  canonical hash and the codegen; CI runs each for a short smoke.
 
 ## Benchmarks
 
@@ -138,8 +179,18 @@ compilation. See [BENCHMARKS.md](BENCHMARKS.md); reproduce with
 
 ## Requirements
 
-- Rust 1.86+ (MSRV). Building generated artifacts additionally needs the target
-  toolchain (`wasm32-unknown-unknown` for WASM, a `thumbv*` target for `no_std`).
+- **Rust 1.86+** — the workspace MSRV; the Node binding needs **Rust 1.88**.
+  Building a generated artifact additionally needs its target toolchain
+  (`wasm32-unknown-unknown` for WASM, a `thumbv*` target for `no_std`).
+- **Python 3.9+** — the Python binding.
+- **Node 22+** — the Node binding.
+- **Go 1.23+** — the Go binding.
+- **Java 22+** — the Java binding.
+- **R 4.1+** — the R package.
+- **.NET 8+** — the C# binding.
+- A **C11 / C++17** compiler with CMake 3.15+ for the C and C++ examples.
+
+See each `bindings/<lang>/README.md` for the per-language build and install.
 
 ## Security
 
@@ -147,16 +198,42 @@ See [SECURITY.md](SECURITY.md) and [THREAT_MODEL.md](THREAT_MODEL.md). The
 compiler generates code and can invoke `cargo` on it — run it only on trusted
 specs.
 
+## Ecosystem
+
+Part of the [Wickra](https://github.com/wickra-lib/wickra) family — each one a
+data-driven core with a CLI and the same ten-language binding surface:
+
+- [**wickra**](https://github.com/wickra-lib/wickra) — main library (Rust core + Python / Node.js / WASM bindings + a C ABI for C / C++ / C# / Go / Java / R)
+- [**wickra-playground**](https://github.com/wickra-lib/wickra-playground) — a polyglot strategy playground: one StrategySpec live side by side in Python, Rust, JS and Go, entirely in the browser
+- [**wickra-exchange**](https://github.com/wickra-lib/wickra-exchange) — unified market-data + execution across ten crypto exchanges
+- [**wickra-backtest**](https://github.com/wickra-lib/wickra-backtest) — event-driven backtester over the Wickra core
+- [**wickra-terminal**](https://github.com/wickra-lib/wickra-terminal) — the trading terminal: a TUI and a browser renderer over the stack
+- [**wickra-screener**](https://github.com/wickra-lib/wickra-screener) — parallel multi-symbol screening over 514 streaming indicators
+- [**wickra-xray**](https://github.com/wickra-lib/wickra-xray) — market-microstructure explorer: footprint, order-book heatmap, liquidation map, funding/OI divergence
+- [**wickra-copilot**](https://github.com/wickra-lib/wickra-copilot) — local market copilot grounded in real order-book, liquidation and funding microstructure
+- [**wickra-shazam**](https://github.com/wickra-lib/wickra-shazam) — match an asset's current microstructure fingerprint against its entire history
+- [**wickra-benchmark**](https://github.com/wickra-lib/wickra-benchmark) — reproducible, golden-verified benchmark suite — recompute any (strategy, dataset, report) in ten languages and confirm it byte-for-byte
+- [**wickra-strategy-ci**](https://github.com/wickra-lib/wickra-strategy-ci) — Jest for trading strategies: golden-pin the report, catch regressions in CI, property-test against fuzzed data
+- [**wickra-verify**](https://github.com/wickra-lib/wickra-verify) — confirm or refute a claimed backtest report against its strategy and data, in ten languages
+- [**wickra-proof**](https://github.com/wickra-lib/wickra-proof) — Proof-of-Backtest: deterministic (spec, data) → report + blake3 hash, recomputable byte-for-byte in ten languages
+- [**wickra-zk**](https://github.com/wickra-lib/wickra-zk) — prove a backtest zero-knowledge — on-chain-verifiable performance without revealing the data or the strategy
+- [**wickra-impact**](https://github.com/wickra-lib/wickra-impact) — the backtester that knows you would have moved the market: agent-based fills on the real historical L2 order book
+- [**wickra-darwin**](https://github.com/wickra-lib/wickra-darwin) — evolutionary strategy search at millions of backtests per second, mutating and crossing JSON specs across the 514-indicator space
+- [**wickra-gym**](https://github.com/wickra-lib/wickra-gym) — a Gymnasium-compatible, microstructure-aware backtest environment with O(1) steps for deterministic RL rollouts
+- [**wickra-feature-store**](https://github.com/wickra-lib/wickra-feature-store) — OHLCV and microstructure streams into ML-ready feature matrices over 514 O(1) streaming indicators
+- [**wickra-genome**](https://github.com/wickra-lib/wickra-genome) — a vector database of the whole market: every asset a 514-dim live vector, for similarity search, clustering and anomaly detection
+- [**wickra-timemachine**](https://github.com/wickra-lib/wickra-timemachine) — scrub the whole market like a video — every symbol, full order book, rewound to any moment via deterministic re-fold
+- [**wickra-synth**](https://github.com/wickra-lib/wickra-synth) — deterministic synthetic market microstructure: OHLCV, order book, trades and funding from a single seed
+- [**wickra-radar**](https://github.com/wickra-lib/wickra-radar) — a liquidation-cascade early-warning radar over 514 streaming indicators
+- [**wickra-embed**](https://github.com/wickra-lib/wickra-embed) — allocation-free, `no_std` streaming indicators for bare-metal and HFT, byte-for-byte identical to the core
+- [**wickra-pico**](https://github.com/wickra-lib/wickra-pico) — the O(1) indicator core running bare-metal on a $5 Raspberry Pi Pico — the LED blinks on the EMA cross
+
+Docs at [docs.wickra.org](https://docs.wickra.org); the marketing site and
+in-browser demo at [wickra.org](https://wickra.org).
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
-
-## Disclaimer
-
-Wickra Compile is a code-generation tool, provided "as is" without warranty of
-any kind. It generates projects and can invoke `cargo` to build them — run it
-only on specs you trust. Nothing here is financial advice; compiled strategies
-are your responsibility, and trading carries risk of loss.
 
 ## License
 
@@ -169,6 +246,13 @@ at your option. Unless you explicitly state otherwise, any contribution
 intentionally submitted for inclusion in this work, as defined in the Apache-2.0
 license, shall be dual-licensed as above, without any additional terms or
 conditions.
+
+## Disclaimer
+
+Wickra Compile is a code-generation tool, provided "as is" without warranty of
+any kind. It generates projects and can invoke `cargo` to build them — run it
+only on specs you trust. Nothing here is financial advice; compiled strategies
+are your responsibility, and trading carries risk of loss.
 
 ---
 
