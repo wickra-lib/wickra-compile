@@ -8,6 +8,8 @@ abstract: >-
   is materialized as a feature matrix, exposed as a JSON-over-C-ABI data API in
   ten languages.
 type: software
+version: "0.1.0"
+date-released: "2026-09-14"
 authors:
   - alias: kingchenc
     website: "https://wickra.org"
