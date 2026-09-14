@@ -46,7 +46,7 @@ public class GoldenTests
     }
 
     // Walk up from the test assembly directory to the repository's `golden/`.
-    private static string GoldenDir()
+    internal static string GoldenDir()
     {
         var dir = new DirectoryInfo(AppContext.BaseDirectory);
         while (dir is not null)

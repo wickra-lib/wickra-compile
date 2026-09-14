@@ -4,6 +4,10 @@
   "private": true,
   "description": "A runnable Node.js example for wickra-compile.",
   "type": "commonjs",
-  "scripts": { "start": "node compile.js" },
-  "dependencies": { "wickra-compile": "^0.1.0" }
+  "scripts": {
+    "start": "node compile.js"
+  },
+  "dependencies": {
+    "wickra-compile": "file:../../bindings/node"
+  }
 }

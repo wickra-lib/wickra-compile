@@ -12,7 +12,8 @@ bindings/r/.rlib/
 bindings/r/..Rcheck/
 **/*.node
 __pycache__
-bindings/wasm/pkg
+bindings/wasm/pkg/
+bindings/wasm/pkg-node/
 dist
 **/node_modules/
 # .NET build artifacts
@@ -20,3 +21,10 @@ bin/
 obj/
 # Java build artifacts
 bindings/java/target/
+# Staged into src/ by configure at build time; never committed.
+bindings/r/src/wickra_compile.h
+bindings/r/src/libwickra_compile*
+bindings/r/src/wickra_compile_abi.def
+bindings/r/src/wickra-compile-c*
+bindings/r/src/Makevars
+bindings/r/src/symbols.rds

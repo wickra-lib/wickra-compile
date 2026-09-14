@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>wickra-compile WASM — compile a strategy spec</title>
+  <style>
+    body { font-family: ui-sans-serif, system-ui, sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; color: #1d1d1d; }
+    h1 { margin-bottom: .25rem; }
+    .meta { color: #666; margin-top: 0; }
+    table { border-collapse: collapse; width: 100%; margin-top: 1rem; font-variant-numeric: tabular-nums; }
+    th, td { border: 1px solid #ddd; padding: .5rem .75rem; text-align: right; }
+    th:first-child, td:first-child { text-align: left; }
+    th { background: #fafafa; }
+    code { background: #f4f4f4; padding: .1rem .25rem; border-radius: .2rem; font-size: .9em; }
+    pre { background: #f6f8fa; padding: .75rem; border-radius: .3rem; overflow-x: auto; }
+    button { padding: .5rem 1rem; }
+    #status { margin-top: 1rem; color: #666; }
+  </style>
+</head>
+<body>
+  <h1>wickra-compile WASM — compile a strategy spec</h1>
+  <p class="meta">
+    The same example every other language carries: an SMA-crossover
+    <code>StrategySpec</code> compiled in dry-run mode into its deterministic
+    manifest. The manifest is data, not code, so the <code>project_hash</code>
+    here is the same one the CLI and every other binding print for this spec —
+    and it does not depend on the key order the page happened to build the
+    spec in.
+  </p>
+
+  <p><button id="go" disabled>Compile (dry run)</button></p>
+  <p id="status">Loading WASM module…</p>
+
+  <table id="files" hidden>
+    <thead><tr><th>File</th><th>SHA-256</th><th>Bytes</th></tr></thead>
+    <tbody></tbody>
+  </table>
+
+  <pre id="raw" hidden></pre>
+
+  <script type="module">
+    import init, { Compiler, version }
+      from "../../bindings/wasm/pkg/wickra_compile_wasm.js";
+
+    const SPEC = {
+      strategy: {
+        symbol: "btcusdt",
+        timeframe: "1h",
+        indicators: {
+          fast: { type: "Sma", params: [10] },
+          slow: { type: "Sma", params: [30] },
+        },
+        entry: { cross_above: ["fast", "slow"] },
+        exit: { cross_below: ["fast", "slow"] },
+        sizing: { type: "fixed_qty", qty: 1 },
+      },
+      target: { kind: "wasm" },
+      crate_name: "demo",
+    };
+
+    // The same object with its keys in reverse insertion order, recursively:
+    // the byte layout a different page would send for the same logical spec.
+    function reversed(value) {
+      if (Array.isArray(value)) return value.map(reversed);
+      if (value && typeof value === "object") {
+        const out = {};
+        for (const key of Object.keys(value).reverse()) out[key] = reversed(value[key]);
+        return out;
+      }
+      return value;
+    }
+
+    const status = document.getElementById("status");
+    const go = document.getElementById("go");
+
+    function run() {
+      const compiler = new Compiler();
+      const artifact = JSON.parse(compiler.command(JSON.stringify({ cmd: "compile", dry_run: true, spec: SPEC })));
+      const again = JSON.parse(compiler.command(JSON.stringify({ cmd: "compile", dry_run: true, spec: reversed(SPEC) })));
+      if (again.manifest.project_hash !== artifact.manifest.project_hash) {
+        throw new Error("the manifest depends on the spec's key order");
+      }
+
+      const body = document.querySelector("#files tbody");
+      body.replaceChildren();
+      for (const file of artifact.manifest.files) {
+        const tr = document.createElement("tr");
+        for (const cell of [file.path, file.sha256, file.bytes_len]) {
+          const td = document.createElement("td");
+          td.textContent = String(cell);
+          tr.append(td);
+        }
+        body.append(tr);
+      }
+      document.getElementById("files").hidden = false;
+
+      const raw = document.getElementById("raw");
+      raw.textContent = JSON.stringify(artifact.manifest, null, 2);
+      raw.hidden = false;
+
+      status.textContent =
+        `project_hash ${artifact.manifest.project_hash} over ${artifact.manifest.files.length} file(s), key order irrelevant — wickra-compile ${version()}.`;
+    }
+
+    await init();
+    status.textContent = `Module ready — wickra-compile ${version()}.`;
+    go.disabled = false;
+    go.addEventListener("click", () => {
+      try {
+        run();
+      } catch (err) {
+        status.textContent = `Error: ${err}`;
+      }
+    });
+  </script>
+</body>
+</html>

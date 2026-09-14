@@ -45,9 +45,11 @@ pub use targets::{validate_mcu, MCU_ALLOWLIST, TARGET_KINDS};
 #[cfg(feature = "build")]
 pub use builder::compile;
 
-/// The pinned `wickra-backtest` version written into generated projects and
-/// recorded in the manifest.
-pub const BACKTEST_DEP: &str = "0.1";
+/// The `wickra-backtest` version written into generated projects (the wasm and
+/// binary targets; the no_std artifact depends on nothing) and recorded in the
+/// manifest. A caret requirement on the released line, so a generated project
+/// resolves to the newest compatible engine on crates.io.
+pub const BACKTEST_DEP: &str = "0.1.5";
 
 /// The crate version.
 #[must_use]

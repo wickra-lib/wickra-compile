@@ -1,5 +1,5 @@
 [package]
-name = "compile-c"
+name = "wickra-compile-c"
 description = "C ABI (cdylib + staticlib) for wickra-compile — the hub every C-capable language (C, C++, C#, Go, Java, R) links against."
 version.workspace = true
 edition.workspace = true

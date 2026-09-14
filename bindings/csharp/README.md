@@ -11,7 +11,7 @@ dotnet add package Wickra.Compile
 ```
 
 The native C ABI library is loaded through a `DllImportResolver`. For a local
-build, run `cargo build -p compile-c --release` and the test project copies the
+build, run `cargo build -p wickra-compile-c --release` and the test project copies the
 library from `target/release` next to the assembly (see the `<Content>` items in
 `WickraCompile.Tests`).
 
@@ -59,5 +59,5 @@ other binding — the exact cross-language golden invariant.
 
 ## License
 
-Dual-licensed under either [MIT](../../LICENSE-MIT) or
-[Apache-2.0](../../LICENSE-APACHE), at your option.
+Dual-licensed under either [MIT](https://github.com/wickra-lib/wickra-compile/blob/main/LICENSE-MIT) or
+[Apache-2.0](https://github.com/wickra-lib/wickra-compile/blob/main/LICENSE-APACHE), at your option.

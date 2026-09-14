@@ -1,5 +1,5 @@
 [package]
-name = "compile-wasm"
+name = "wickra-compile-wasm"
 description = "WebAssembly bindings for wickra-compile — compile a strategy spec to a deterministic manifest in the browser."
 version.workspace = true
 edition.workspace = true

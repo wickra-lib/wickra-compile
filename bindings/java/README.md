@@ -8,7 +8,7 @@ Compile binding.
 ## Requirements
 
 - JDK 22+ (the FFM API is stable as of JDK 22).
-- The native C ABI library, built by `cargo build -p compile-c` into the
+- The native C ABI library, built by `cargo build -p wickra-compile-c` into the
   workspace `target/debug/` directory (the Maven build reads `native.lib.dir`).
 
 Run with native access enabled:
@@ -61,5 +61,5 @@ other binding — the exact cross-language golden invariant.
 
 ## License
 
-Dual-licensed under either [MIT](../../LICENSE-MIT) or
-[Apache-2.0](../../LICENSE-APACHE), at your option.
+Dual-licensed under either [MIT](https://github.com/wickra-lib/wickra-compile/blob/main/LICENSE-MIT) or
+[Apache-2.0](https://github.com/wickra-lib/wickra-compile/blob/main/LICENSE-APACHE), at your option.

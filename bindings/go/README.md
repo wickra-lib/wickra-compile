@@ -16,7 +16,7 @@ go get github.com/wickra-lib/wickra-compile/bindings/go
 
 The prebuilt C ABI library is staged per platform under `lib/<goos>_<goarch>/`
 and the header is vendored under `include/`. For a local build, copy the library
-built by `cargo build -p compile-c --release` into the matching
+built by `cargo build -p wickra-compile-c --release` into the matching
 `lib/<goos>_<goarch>/` directory (on Windows, ensure that directory is on `PATH`
 when running tests).
 
@@ -71,5 +71,5 @@ other binding — the exact cross-language golden invariant.
 
 ## License
 
-Dual-licensed under either [MIT](../../LICENSE-MIT) or
-[Apache-2.0](../../LICENSE-APACHE), at your option.
+Dual-licensed under either [MIT](https://github.com/wickra-lib/wickra-compile/blob/main/LICENSE-MIT) or
+[Apache-2.0](https://github.com/wickra-lib/wickra-compile/blob/main/LICENSE-APACHE), at your option.

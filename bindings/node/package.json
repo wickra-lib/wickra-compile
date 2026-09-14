@@ -6,11 +6,29 @@
   "main": "index.js",
   "types": "index.d.ts",
   "license": "MIT OR Apache-2.0",
-  "keywords": ["trading", "strategy", "compiler", "wasm", "codegen", "rust"],
-  "repository": { "type": "git", "url": "https://github.com/wickra-lib/wickra-compile" },
-  "bugs": { "url": "https://github.com/wickra-lib/wickra-compile/issues" },
+  "keywords": [
+    "trading",
+    "strategy",
+    "compiler",
+    "wasm",
+    "codegen",
+    "rust"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wickra-lib/wickra-compile"
+  },
+  "bugs": {
+    "url": "https://github.com/wickra-lib/wickra-compile/issues"
+  },
   "homepage": "https://github.com/wickra-lib/wickra-compile",
-  "files": ["index.js", "index.d.ts", "npm", "*.node"],
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "*.node",
+    "LICENSE-MIT",
+    "LICENSE-APACHE"
+  ],
   "napi": {
     "name": "wickra-compile",
     "triples": {
@@ -25,7 +43,9 @@
       ]
     }
   },
-  "engines": { "node": ">= 22" },
+  "engines": {
+    "node": ">= 22"
+  },
   "optionalDependencies": {
     "wickra-compile-linux-x64-gnu": "0.1.0",
     "wickra-compile-linux-arm64-gnu": "0.1.0",
@@ -41,5 +61,7 @@
     "version": "napi version",
     "test": "node --test"
   },
-  "devDependencies": { "@napi-rs/cli": "^3.7.4" }
+  "devDependencies": {
+    "@napi-rs/cli": "^3.9.0"
+  }
 }

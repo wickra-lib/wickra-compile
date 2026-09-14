@@ -25,6 +25,8 @@ paths-ignore:
   # A vendored copy of the C ABI header, kept in sync by
   # .github/scripts/check-cbindgen.sh rather than edited.
   - bindings/go/include
+  # Fixtures, not code: the committed universes and expected reports.
+  - golden
   # Build output and dependency trees.
   - target
   - "**/node_modules"
