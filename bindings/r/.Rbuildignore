@@ -1,0 +1,25 @@
+# Every line here is a regular expression, comments included, so no brackets.
+# Keep everything configure stages or the compiler produces out of the R source
+# tarball built by R CMD build. The package is source-distributed: configure
+# fetches the C ABI at install time, or takes it from the INC and LIB dev
+# override, so none of these belong in the distributable. src/Makevars.win is
+# not staged: it is the Windows link line and ships with the package. Without
+# it the Windows build links no import library at all.
+^src/wickra_compile\.h$
+^src/wickra_compile_abi\.dll$
+^src/wickra_compile_abi\.def$
+^src/libwickra_compile_abi\.dll\.a$
+^src/libwickra_compile\.(so|dylib|a)$
+^src/wickra-compile-c\.tar\.gz$
+^src/wickra-compile-c$
+^src/Makevars$
+^src/.*\.o$
+^src/wickracompile\.(dll|so|dylib)$
+^src/symbols\.rds$
+^src/dlltool\.log$
+^\.gitignore$
+# The cross-language golden parity test. It looks for golden/ in a parent
+# directory, which exists in this repository and never in a built tarball, so
+# `R CMD check` would run a test that silently skips its own subject. CI runs it
+# directly from the repository instead; tests/smoke.R is what ships.
+^tests/run_tests\.R$
