@@ -46,16 +46,21 @@ byte-identical matrix either way.
 - **Production code only** — no mocks outside `#[cfg(test)]`, no TODO stubs, and
   no defensive branches that can never run (they fail coverage).
 
-## Adding a feature or a label
+## Adding a target or a spec field
 
 The spec is a serde struct, so extending it means adding a variant, not a
-closure. A new feature kind (`indicator` / `price` / `microstructure`) or label
-kind (`forward_return` / `triple_barrier`) is added to
-`crates/compile-core/src/spec.rs` and handled in the per-symbol fold, with
-a serde round-trip test and a golden fixture. Indicators themselves come from the
-[Wickra](https://github.com/wickra-lib/wickra) core registry by name and
-parameters — no indicator code lives here. See
-[docs/FEATURES.md](docs/FEATURES.md) and [docs/LABELS.md](docs/LABELS.md).
+closure. A new **target** is a variant of `Target` in
+`crates/compile-core/src/spec.rs`, rendered by `render` in
+`crates/compile-core/src/templates.rs` (the generated `Cargo.toml`, `main.rs`
+or `lib.rs`, and any target-specific files) and described in the manifest, with
+a serde round-trip test, a golden spec under `golden/specs/` and its blessed
+manifest under `golden/expected/`. A new **spec field** is a field of
+`CompileSpec` with a default, so every existing spec still parses, and a line
+in the manifest if the artifact depends on it. The strategy itself is opaque
+here: it is validated as a `wickra-backtest` `StrategySpec` and embedded
+verbatim, so no indicator or strategy code lives in this repository. See
+[docs/COMPILESPEC.md](docs/COMPILESPEC.md), [docs/TARGETS.md](docs/TARGETS.md)
+and [docs/TEMPLATES.md](docs/TEMPLATES.md).
 
 ## Developer Certificate of Origin
 
