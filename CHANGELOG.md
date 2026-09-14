@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-09-14
+
 ### Fixed
 
 - **The generated `no_std` project could not build.** Its Cargo template
@@ -138,4 +140,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `DETERMINISM.md`, `TEMPLATES.md`, `Cookbook.md`, per-binding READMEs, and
   measured `BENCHMARKS.md` figures.
 
-[Unreleased]: https://github.com/wickra-lib/wickra-compile/commits/main
+[Unreleased]: https://github.com/wickra-lib/wickra-compile/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/wickra-lib/wickra-compile/releases/tag/v0.1.0
