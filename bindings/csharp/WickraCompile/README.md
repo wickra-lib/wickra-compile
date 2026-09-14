@@ -11,7 +11,7 @@ dotnet add package Wickra.Compile
 ```
 
 The package ships the native C ABI library per runtime identifier under
-`runtimes/<rid>/native/`. For a local build, `cargo build -p compile-c --release`
+`runtimes/<rid>/native/`. For a local build, `cargo build -p wickra-compile-c --release`
 and the bundled `DllImportResolver` probes the Cargo `target/` tree.
 
 ## Usage

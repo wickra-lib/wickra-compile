@@ -1,5 +1,5 @@
 [package]
-name = "compile-python"
+name = "wickra-compile-python"
 description = "Python bindings for wickra-compile: compile a strategy spec into a standalone deployable."
 version.workspace = true
 edition.workspace = true

@@ -1,5 +1,5 @@
 [package]
-name = "compile-node"
+name = "wickra-compile-node"
 description = "Node.js bindings for wickra-compile: compile a strategy spec into a standalone deployable."
 version.workspace = true
 edition.workspace = true

@@ -12,7 +12,7 @@ environment variables read by the `Makevars`:
 - `WKCOMPILE_INC` — the directory holding `wickra_compile.h`
   (`bindings/c/include/`).
 - `WKCOMPILE_LIB` — the directory holding the built C ABI library
-  (`target/release/` after `cargo build -p compile-c --release`).
+  (`target/release/` after `cargo build -p wickra-compile-c --release`).
 
 At run time the loader finds the shared library via `PATH` (Windows) or
 `LD_LIBRARY_PATH` / `DYLD_LIBRARY_PATH` (Linux / macOS).
@@ -66,5 +66,5 @@ other binding — the exact cross-language golden invariant.
 
 ## License
 
-Dual-licensed under either [MIT](../../LICENSE-MIT) or
-[Apache-2.0](../../LICENSE-APACHE), at your option.
+Dual-licensed under either [MIT](https://github.com/wickra-lib/wickra-compile/blob/main/LICENSE-MIT) or
+[Apache-2.0](https://github.com/wickra-lib/wickra-compile/blob/main/LICENSE-APACHE), at your option.

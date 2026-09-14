@@ -18,7 +18,7 @@ The output lands in `pkg/`.
 ## Usage
 
 ```js
-import init, { Compiler } from "./pkg/compile_wasm.js";
+import init, { Compiler } from "./pkg/wickra_compile_wasm.js";
 
 await init();
 
@@ -74,5 +74,5 @@ the native run — the exact cross-language golden invariant.
 
 ## License
 
-Dual-licensed under either [MIT](../../LICENSE-MIT) or
-[Apache-2.0](../../LICENSE-APACHE), at your option.
+Dual-licensed under either [MIT](https://github.com/wickra-lib/wickra-compile/blob/main/LICENSE-MIT) or
+[Apache-2.0](https://github.com/wickra-lib/wickra-compile/blob/main/LICENSE-APACHE), at your option.
