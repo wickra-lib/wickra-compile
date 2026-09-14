@@ -37,12 +37,18 @@ The spec is a simple SMA crossover targeting WebAssembly:
 | Java | [`java/Compile.java`](java/Compile.java) | see header comment in the file |
 | R | [`r/compile.R`](r/compile.R) | `R CMD INSTALL bindings/r && Rscript examples/r/compile.R` |
 | C / C++ | [`c/`](c/compile.c) | `cmake -S examples/c -B examples/c/build && cmake --build examples/c/build && ctest --test-dir examples/c/build` |
+| WASM | [`wasm/`](wasm/) | `wasm-pack build bindings/wasm --target web`, serve the repository root, open `examples/wasm/compile.html` |
 
 The Go, C#, Java, R, C and C++ examples call through the C ABI or the native
-binding, so they need the library built first:
+binding, so they need the library built first. The C example calls the five
+ABI functions directly; the C++ example goes through
+`bindings/c/include/wickra_compile.hpp`, the header-only hull that owns the
+handle and runs the length-out protocol. `golden_test.c` beside them asserts
+golden parity and the dry-run-versus-build equivalence, and needs the
+`thumbv7em-none-eabihf` target for its real build.
 
 ```bash
-cargo build --release -p compile-c   # C / C++ / Go / C# / Java / R
+cargo build --release -p wickra-compile-c   # C / C++ / Go / C# / Java / R
 ```
 
 ## Data

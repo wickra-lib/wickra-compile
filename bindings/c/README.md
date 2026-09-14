@@ -32,6 +32,23 @@ wickra_compile_free(h);
   artifact handle (from a prior `artifact_bytes` response) into `out`.
 - `wickra_compile_version()` — a static NUL-terminated version string.
 
+## Once-only execution
+
+A `compile` with `dry_run: false` writes a project and runs `cargo`, so the
+two-call length protocol must not execute it twice. The handle caches the
+response it has computed but not yet delivered, and a repeated call with the
+same command bytes reuses it instead of re-executing. Once the response has
+been written to a buffer the cache is cleared, so the next identical command
+executes freshly.
+
+## C++
+
+`include/wickra_compile.hpp` is a header-only C++17 hull over the same five
+functions: `wickra::Compiler` owns and frees the handle, `command` runs the
+length-out protocol for you, `artifact_bytes` returns a vector, and a negative
+return becomes a `wickra::CompileError`. In-band refusals (`{"ok":false,...}`)
+are returned as strings, not thrown. `examples/c/compile.cpp` builds against it.
+
 ## Determinism
 
 A `compile` with `dry_run: true` returns the deterministic manifest (byte-identical

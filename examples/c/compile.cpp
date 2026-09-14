@@ -1,14 +1,19 @@
-// A runnable C++ example: compile a strategy spec (dry run) through the
-// wickra-compile C ABI and print the raw JSON manifest. Every language example
-// uses the same spec and prints the same project_hash.
-#include <cstdlib>
-#include <iostream>
+// A runnable C++ example: compile a strategy spec (dry run) and print the raw
+// JSON manifest -- through the C++ hull. Every language example uses the same
+// spec and prints the same project_hash.
+//
+// This goes through `wickra_compile.hpp`, the C++ hull shipped beside the C
+// header, because that hull is what a C++ caller is meant to use: it owns and
+// frees the handle, runs the two-call length protocol behind
+// `wickra_compile_command` for you -- the core carries the produced-but-
+// undelivered response between the two calls, so a real build runs once, not
+// twice -- and turns a refusal into an exception rather than a negative
+// integer that is easy to ignore. Calling the C functions directly from C++
+// works too, but then the hull would be shipped without anything building it.
+#include <cstdio>
 #include <string>
-#include <vector>
 
-extern "C" {
-#include "wickra_compile.h"
-}
+#include "wickra_compile.hpp"
 
 namespace {
 const char *kCmd =
@@ -23,25 +28,22 @@ const char *kCmd =
 }  // namespace
 
 int main() {
-    WickraCompiler *compiler = wickra_compile_new();
-    if (!compiler) {
-        std::cerr << "failed to build compiler\n";
+    try {
+        wickra::Compiler compiler;
+        const std::string artifact = compiler.command(kCmd);
+        std::printf("wickra-compile %s\n", wickra::Compiler::version().c_str());
+        std::printf("output: %s\n", artifact.c_str());
+        // An in-band refusal: the ABI answered, the core declined. That is a
+        // response rather than an error, so the hull does not throw on it.
+        if (artifact.find("\"ok\":false") != std::string::npos) {
+            std::fprintf(stderr, "the compiler refused the spec\n");
+            return 1;
+        }
+    } catch (const wickra::CompileError &err) {
+        // Every failure arrives here: a handle the library refused, a call that
+        // returned a negative code.
+        std::fprintf(stderr, "%s\n", err.what());
         return 1;
     }
-
-    // Length-out protocol: learn the length, then read into a caller buffer.
-    int len = wickra_compile_command(compiler, kCmd, nullptr, 0);
-    if (len < 0) {
-        std::cerr << "command failed: code " << len << "\n";
-        wickra_compile_free(compiler);
-        return 1;
-    }
-    std::vector<char> buf(static_cast<std::size_t>(len) + 1);
-    wickra_compile_command(compiler, kCmd, buf.data(), buf.size());
-
-    std::cout << "wickra-compile " << wickra_compile_version() << "\n";
-    std::cout << "output: " << std::string(buf.data()) << "\n";
-
-    wickra_compile_free(compiler);
     return 0;
 }
