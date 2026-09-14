@@ -21,6 +21,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   wasm and the binary projects take `wickra-backtest` from crates.io
   (`0.1.5`) instead of git. The golden manifests are re-blessed for the new
   templates; all three targets cross-compile for real.
+- **Canonical JSON round-trips exactly.** The fuzz target over the
+  canonicaliser -- which the family-level CI runs for the first time -- found a
+  number the canonical form printed as `-9.299999999999999e+30` and re-parsed
+  as `-9.3e+30`: serde_json's default float parser is fast and may be a ULP
+  off, so a spec hash could depend on which neighbour the parser landed on.
+  `float_roundtrip` is on; the canonical form is a fixed point again and the
+  golden hashes are unchanged.
 - **Operating-mode equivalence is tested in the core and in every binding.**
   The manifest a dry run describes must be the manifest a real build builds:
   `operating_modes.rs` compiles the no_std project for real (no dependencies,

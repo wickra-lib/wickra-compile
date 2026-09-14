@@ -9,7 +9,7 @@ cargo-fuzz = true
 
 [dependencies]
 libfuzzer-sys = "0.4"
-serde_json = "1"
+serde_json = { version = "1", features = ["float_roundtrip"] }
 # The codegen core under test. Default features off so the fuzzers exercise pure
 # codegen (no `build` feature, i.e. no cargo invocation).
 wickra-compile-core = { path = "../crates/compile-core", default-features = false }

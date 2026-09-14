@@ -26,7 +26,12 @@ authors = ["wickra-lib"]
 # Workspace-internal crate, referenced by the CLI, bench, example and bindings.
 wickra-compile-core = { version = "0.1.0", path = "crates/compile-core" }
 serde = { version = "1", features = ["derive"] }
-serde_json = { version = "1", features = ["preserve_order"] }
+# float_roundtrip: serde_json's default float parser is fast and may be a ULP
+# off, so a number printed by the canonicaliser could re-parse to a neighbour
+# and print differently -- the fuzzer found "-9.299999999999999e+30" coming
+# back as "-9.3e+30". The canonical hash is only a hash of the logical spec if
+# the text round-trips exactly.
+serde_json = { version = "1", features = ["preserve_order", "float_roundtrip"] }
 thiserror = "2"
 sha2 = "0.11"
 handlebars = "6"
