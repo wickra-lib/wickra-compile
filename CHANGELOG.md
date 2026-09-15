@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-09-15
+
+### Fixed
+
+- **The Go module mirror is usable.** The v0.1.0 mirror carried a `go.mod`
+  naming the in-repo path `github.com/wickra-lib/wickra-compile/bindings/go`,
+  so `go get github.com/wickra-lib/wickra-compile-go` refused it and
+  pkg.go.dev could not index it. The binding, its README and the Go example
+  now name the standalone module path, as every released sibling does; the
+  next mirror release is the first one Go can fetch.
+
 ## [0.1.0] - 2026-09-14
 
 ### Fixed
@@ -140,5 +151,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `DETERMINISM.md`, `TEMPLATES.md`, `Cookbook.md`, per-binding READMEs, and
   measured `BENCHMARKS.md` figures.
 
-[Unreleased]: https://github.com/wickra-lib/wickra-compile/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/wickra-lib/wickra-compile/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/wickra-lib/wickra-compile/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/wickra-lib/wickra-compile/releases/tag/v0.1.0

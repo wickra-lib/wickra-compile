@@ -1,6 +1,6 @@
 {
   "name": "wickra-compile",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Compile a Wickra strategy spec into a standalone deployable (WASM, binary, or no_std) with a deterministic manifest. Node bindings powered by Rust.",
   "author": "kingchenc <support@wickra.org>",
   "main": "index.js",
@@ -47,12 +47,12 @@
     "node": ">= 22"
   },
   "optionalDependencies": {
-    "wickra-compile-linux-x64-gnu": "0.1.0",
-    "wickra-compile-linux-arm64-gnu": "0.1.0",
-    "wickra-compile-darwin-x64": "0.1.0",
-    "wickra-compile-darwin-arm64": "0.1.0",
-    "wickra-compile-win32-x64-msvc": "0.1.0",
-    "wickra-compile-win32-arm64-msvc": "0.1.0"
+    "wickra-compile-linux-x64-gnu": "0.1.1",
+    "wickra-compile-linux-arm64-gnu": "0.1.1",
+    "wickra-compile-darwin-x64": "0.1.1",
+    "wickra-compile-darwin-arm64": "0.1.1",
+    "wickra-compile-win32-x64-msvc": "0.1.1",
+    "wickra-compile-win32-arm64-msvc": "0.1.1"
   },
   "scripts": {
     "build": "napi build --platform --release",
