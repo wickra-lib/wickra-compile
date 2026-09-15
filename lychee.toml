@@ -45,8 +45,4 @@ exclude = [
     # wheels are built and the publish job retries hourly. Remove this entry
     # when the project page answers.
     "^https?://pypi\\.org/project/wickra-compile",
-    # Until 0.1.1: the v0.1.0 mirror carried a go.mod naming the in-repo path,
-    # which pkg.go.dev refuses to index. The path is fixed on main; the next
-    # tag publishes a mirror it can read. Remove this entry with that tag.
-    "^https?://pkg\\.go\\.dev/github\\.com/wickra-lib/wickra-compile-go",
 ]
