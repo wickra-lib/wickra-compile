@@ -11,7 +11,7 @@ byte-identical to every other Wickra Compile binding.
 ## Install
 
 ```bash
-go get github.com/wickra-lib/wickra-compile/bindings/go
+go get github.com/wickra-lib/wickra-compile-go
 ```
 
 The prebuilt C ABI library is staged per platform under `lib/<goos>_<goarch>/`
@@ -28,7 +28,7 @@ package main
 import (
 	"fmt"
 
-	wickra "github.com/wickra-lib/wickra-compile/bindings/go"
+	wickra "github.com/wickra-lib/wickra-compile-go"
 )
 
 func main() {

@@ -10,7 +10,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	wickra "github.com/wickra-lib/wickra-compile/bindings/go"
+	wickra "github.com/wickra-lib/wickra-compile-go"
 )
 
 const spec = `{"strategy":{"symbol":"btcusdt","timeframe":"1h",` +
