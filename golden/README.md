@@ -46,6 +46,13 @@ volume = 1000 + i
 Never edit `expected/*.json` by hand. To re-bless after an intentional codegen
 change, run from the repository root (so `embed_data` CSV paths resolve):
 
+Every manifest also carries `compiler_version`, the release it was produced
+by; `project_hash` does not depend on it. That stamp moves with every release,
+so a version bump rewrites it in these files (`bump_version.py` treats the
+stamp as a touchpoint) -- the bytes a binding must reproduce are the manifest
+of the release under test, and a bump that left the stamp behind failed the
+golden test in every language.
+
 ```bash
 cargo build -p wickra-compile --release
 for s in sma_cross ema_trend rsi_reversion no_std_blink binary_daemon; do
