@@ -1,4 +1,4 @@
-# Golden harness
+# Golden fixtures
 
 The cross-language golden invariant: for a given `CompileSpec`, every binding —
 Rust core, the CLI, and all ten language bindings — produces the **byte-identical

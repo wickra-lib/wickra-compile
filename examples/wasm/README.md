@@ -1,44 +1,43 @@
-# wickra-compile WASM examples
+# Wickra Compile WASM examples
 
-Browser demos for the `wickra-compile-wasm` binding.
-
-The WASM build carries the whole codegen core: the same templates, the same
-canonical hashing and the same manifest bytes the CLI and the other nine
-bindings produce. A spec is data, not code, so the `project_hash` on this page
-is the same one `examples/node/compile.js` prints. A real build needs `cargo`
-and stays with the native bindings; the page stops at the dry-run manifest.
+Browser demos for the [Wickra Compile WASM binding](../../bindings/wasm): an HTML page whose module script
+loads the package the same way (`init()`, then construct), builds the same
+object every other binding builds and prints the same output into the page, so
+the pattern transfers one-to-one to your own page.
 
 ## Build
 
-The module ships as a `wasm-pack` `--target web` bundle. Build it once from the
-repository root:
+The WASM module ships as a `wasm-pack` `--target web` bundle. Build it once from
+the repository root:
 
 ```bash
-wasm-pack build bindings/wasm --target web --release
+wasm-pack build bindings/wasm --target web
 ```
 
-That writes `bindings/wasm/pkg/` with the `.wasm` binary, the JS loader and the
-type declarations the page imports.
+## Serve
 
-## Run
-
-The page loads its module over `http://`, not `file://`, because ES module
-imports and `WebAssembly.instantiateStreaming` both need a real origin. Serve the
-repository root:
+ES modules and `fetch()` both need a real HTTP origin, not `file://`. Any static
+server from the repository root works:
 
 ```bash
+# Python:
 python -m http.server 8000
+
+# Or Node:
+npx http-server -p 8000
 ```
 
-Then open `http://localhost:8000/examples/wasm/compile.html`.
+Then open the demo at `http://localhost:8000/examples/wasm/<file>`. CI cannot open
+a browser; it extracts the `<script type="module">` and parses it with
+`node --check`, so a broken edit fails there rather than in a reader's tab.
 
-## Pages
+## Demos
 
-| Page | What it does |
-|------|--------------|
-| `compile.html` | Compiles the SMA-crossover spec in dry-run mode, lists the generated files with their hashes, and shows that the manifest does not depend on the key order the spec was built in. The page counterpart of `examples/node/compile.js`. |
+| Demo | What it shows |
+|------|---------------|
+| `compile.html` | A runnable example against this binding. |
 
 ## See also
 
-- [examples/README.md](../README.md) — the same compile in every other language.
-- [bindings/wasm/README.md](../../bindings/wasm/README.md) — the binding itself.
+- [`bindings/wasm/README.md`](../../bindings/wasm/README.md) — install, quick start and the API of the package.
+- [`examples/README.md`](../README.md) — the same example in every other language.
