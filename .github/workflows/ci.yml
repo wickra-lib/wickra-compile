@@ -184,7 +184,7 @@ jobs:
           persist-credentials: false
       - uses: ./.github/actions/setup-rust
         with:
-          toolchain: nightly
+          toolchain: nightly-2026-07-01
       - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
         with:
           workspaces: fuzz
@@ -193,16 +193,16 @@ jobs:
         with:
           tool: cargo-fuzz
       - name: Fuzz canonical_hash (30 s)
-        run: cargo +nightly fuzz run --target x86_64-unknown-linux-gnu canonical_hash -- -max_total_time=30
+        run: cargo +nightly-2026-07-01 fuzz run --target x86_64-unknown-linux-gnu canonical_hash -- -max_total_time=30
         working-directory: fuzz
       - name: Fuzz codegen (30 s)
-        run: cargo +nightly fuzz run --target x86_64-unknown-linux-gnu codegen -- -max_total_time=30
+        run: cargo +nightly-2026-07-01 fuzz run --target x86_64-unknown-linux-gnu codegen -- -max_total_time=30
         working-directory: fuzz
       - name: Fuzz spec_parse (30 s)
-        run: cargo +nightly fuzz run --target x86_64-unknown-linux-gnu spec_parse -- -max_total_time=30
+        run: cargo +nightly-2026-07-01 fuzz run --target x86_64-unknown-linux-gnu spec_parse -- -max_total_time=30
         working-directory: fuzz
       - name: Fuzz target_parse (30 s)
-        run: cargo +nightly fuzz run --target x86_64-unknown-linux-gnu target_parse -- -max_total_time=30
+        run: cargo +nightly-2026-07-01 fuzz run --target x86_64-unknown-linux-gnu target_parse -- -max_total_time=30
         working-directory: fuzz
 
   python:
@@ -502,7 +502,7 @@ jobs:
       - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
       - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
         with:
-          dotnet-version: "8.0"
+          dotnet-version: "8.0.x"
       # The test project copies the native library from target/release (see the
       # <Content> items), so build it in the release profile here.
       - name: Build the C ABI library

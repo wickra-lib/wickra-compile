@@ -1429,9 +1429,9 @@ dependencies = [
 
 [[package]]
 name = "wickra-backtest"
-version = "0.1.5"
+version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "204e0d61e6d00e0dc05081db4711fa719818e5b5a95076326b90ad2f95613a4f"
+checksum = "7cc0b23d538ddde9f13e960063970eb0ac169f8973a3c45141c04af75ed9e6c5"
 dependencies = [
  "wickra-backtest-core",
  "wickra-backtest-data",
@@ -1439,9 +1439,9 @@ dependencies = [
 
 [[package]]
 name = "wickra-backtest-core"
-version = "0.1.5"
+version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bdb999eb070628880e7146762eaf89c2e5a042971b00bd7b437841ebc7afe8dc"
+checksum = "b528174b3b512b68eea41bfa454267d97f1ef53cde58ed983dbf1ba42ef4e939"
 dependencies = [
  "schemars",
  "serde",
@@ -1452,9 +1452,9 @@ dependencies = [
 
 [[package]]
 name = "wickra-backtest-data"
-version = "0.1.5"
+version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0af40b00aa38805aad01f04e931cdd11f590ed513b79b8a694a7d92178d0604c"
+checksum = "4ca3403c9be2477a3b54b4cfcd8f00b42676584f106c3f19f072c5b1c71d53a2"
 dependencies = [
  "serde_json",
  "wickra-backtest-core",

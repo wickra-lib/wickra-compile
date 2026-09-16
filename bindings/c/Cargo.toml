@@ -30,5 +30,5 @@ missing_errors_doc = "allow"
 
 [dependencies]
 # The codegen core with the default `build` feature (native → real cargo builds).
-wickra-compile-core = { path = "../../crates/compile-core", version = "0.1" }
+wickra-compile-core = { workspace = true }
 serde_json = { workspace = true }
