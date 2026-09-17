@@ -55,7 +55,7 @@ cargo run -p wickra-compile -- --spec golden/specs/sma_cross.json --dry-run --ou
 
 ## Status
 
-**0.1.1 — the current release.** The codegen core, the reference CLI, the
+**0.1.2 — the current release.** The codegen core, the reference CLI, the
 ten-language binding surface, the golden corpus and the full CI matrix are in
 place.
 

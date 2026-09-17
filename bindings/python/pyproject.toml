@@ -4,7 +4,7 @@ build-backend = "maturin"
 
 [project]
 name = "wickra-compile"
-version = "0.1.1"
+version = "0.1.2"
 description = "Compile a Wickra strategy spec into a standalone deployable (WASM, binary, or no_std) with a deterministic manifest."
 readme = "README.md"
 license = "MIT OR Apache-2.0"

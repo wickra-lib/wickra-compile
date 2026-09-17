@@ -294,7 +294,7 @@ dependencies = [
 
 [[package]]
 name = "compile-bench"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "codspeed-criterion-compat",
  "serde_json",
@@ -1463,7 +1463,7 @@ dependencies = [
 
 [[package]]
 name = "wickra-compile"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "clap",
  "serde_json",
@@ -1472,7 +1472,7 @@ dependencies = [
 
 [[package]]
 name = "wickra-compile-c"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "serde_json",
  "wickra-compile-core",
@@ -1480,7 +1480,7 @@ dependencies = [
 
 [[package]]
 name = "wickra-compile-core"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "proptest",
  "serde",
@@ -1493,7 +1493,7 @@ dependencies = [
 
 [[package]]
 name = "wickra-compile-example"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "serde_json",
  "wickra-compile-core",
@@ -1501,7 +1501,7 @@ dependencies = [
 
 [[package]]
 name = "wickra-compile-node"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "napi",
  "napi-build",
@@ -1511,7 +1511,7 @@ dependencies = [
 
 [[package]]
 name = "wickra-compile-python"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "pyo3",
  "wickra-compile-core",
@@ -1519,7 +1519,7 @@ dependencies = [
 
 [[package]]
 name = "wickra-compile-wasm"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "wasm-bindgen",
  "wickra-compile-core",
