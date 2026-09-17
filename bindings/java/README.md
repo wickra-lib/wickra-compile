@@ -38,14 +38,14 @@ Maven:
 <dependency>
   <groupId>org.wickra</groupId>
   <artifactId>wickra-compile</artifactId>
-  <version>0.1.1</version>
+  <version>0.1.2</version>
 </dependency>
 ```
 
 Gradle:
 
 ```kotlin
-implementation("org.wickra:wickra-compile:0.1.1")
+implementation("org.wickra:wickra-compile:0.1.2")
 ```
 
 The native library ships prebuilt per platform inside the jar and is

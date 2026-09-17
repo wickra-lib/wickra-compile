@@ -1,7 +1,7 @@
 Package: wickracompile
 Type: Package
 Title: Compile a Wickra Strategy Spec to a Standalone Deployable
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: person("kingchenc", role = c("aut", "cre"), email = "support@wickra.org")
 Description: R bindings for wickra-compile over its C ABI hub: a strategy spec
     is compiled into a standalone deployable and a byte-identical manifest -
