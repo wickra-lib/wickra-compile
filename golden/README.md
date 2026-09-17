@@ -1,4 +1,4 @@
-# Golden harness
+# Golden fixtures
 
 The cross-language golden invariant: for a given `CompileSpec`, every binding —
 Rust core, the CLI, and all ten language bindings — produces the **byte-identical
@@ -41,7 +41,7 @@ volume = 1000 + i
 - `BTCUSDT`: `base = 30000`, `amp = 2000`, `phase = 0`.
 - `ETHUSDT`: `base = 2000`, `amp = 150`, `phase = 1`.
 
-## Blessing (regenerating the expected manifests)
+## Blessing
 
 Never edit `expected/*.json` by hand. To re-bless after an intentional codegen
 change, run from the repository root (so `embed_data` CSV paths resolve):

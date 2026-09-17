@@ -1,29 +1,137 @@
-# Examples
+# Wickra Compile examples
 
 Runnable, self-contained examples — one per supported language. Every example
 compiles the **same** strategy spec in dry-run mode and prints the resulting
 `project_hash`. Because the manifest is deterministic across languages, that hash
 is byte-identical in all of them: the whole point of wickra-compile.
 
-The spec is a simple SMA crossover targeting WebAssembly:
+## Rust — `examples/rust/`
 
-```json
-{
-  "strategy": {
-    "symbol": "btcusdt",
-    "timeframe": "1h",
-    "indicators": {
-      "fast": { "type": "Sma", "params": [10] },
-      "slow": { "type": "Sma", "params": [30] }
-    },
-    "entry": { "cross_above": ["fast", "slow"] },
-    "exit": { "cross_below": ["fast", "slow"] },
-    "sizing": { "type": "fixed_qty", "qty": 1 }
-  },
-  "target": { "kind": "wasm" },
-  "crate_name": "demo"
-}
+As the CI examples job runs it, from the repository root:
+
+```bash
+cargo run -q --manifest-path examples/rust/Cargo.toml
 ```
+
+| Example | What it does |
+| --- | --- |
+| `src/main.rs` | A runnable Rust example: compile a strategy spec (dry run) and print its deterministic manifest. |
+
+## C / C++ — `examples/c/`
+
+Build the library first (`cargo build -p wickra-compile-c --release`), then build and run
+the examples via CMake, as the CI C ABI job does:
+
+```bash
+cmake -S examples/c -B examples/c/build
+cmake --build examples/c/build --config Release
+ctest --test-dir examples/c/build -C Release --output-on-failure
+```
+
+| Example | What it does |
+| --- | --- |
+| `compile.c` | A runnable C example: compile a strategy spec (dry run) through the |
+| `compile.cpp` | A runnable C++ example: compile a strategy spec (dry run) and print the raw JSON manifest -- through the C++ hull. |
+
+## C# — `examples/csharp/`
+
+As the CI examples job runs it, from the repository root:
+
+```bash
+dotnet run --project examples/csharp/Compile
+```
+
+| Example | What it does |
+| --- | --- |
+| `Compile/Program.cs` | A runnable C# example: compile a strategy spec (dry run) and print its deterministic manifest. |
+
+## Go — `examples/go/`
+
+As the CI examples job runs it, from the repository root:
+
+```bash
+cd examples/go && go run .
+```
+
+| Example | What it does |
+| --- | --- |
+| `compile.go` | A runnable Go example: compile a strategy spec (dry run) and print its deterministic manifest. |
+
+## R — `examples/r/`
+
+As the CI examples job runs it, from the repository root:
+
+```bash
+R CMD INSTALL bindings/r
+Rscript examples/r/compile.R
+```
+
+| Example | What it does |
+| --- | --- |
+| `compile.R` | A runnable R example: compile a strategy spec (dry run) through the binding. |
+
+## Java — `examples/java/`
+
+As the CI examples job runs it, from the repository root:
+
+```bash
+mvn -f bindings/java/pom.xml -q package -DskipTests
+javac -cp bindings/java/target/classes examples/java/Compile.java -d examples/java/out
+java --enable-native-access=ALL-UNNAMED  -Dnative.lib.dir="$PWD/target/release"  -cp "bindings/java/target/classes:examples/java/out" Compile
+```
+
+| Example | What it does |
+| --- | --- |
+| `Compile.java` | A runnable Java example: compile a strategy spec (dry run) through the binding. |
+
+## Python — `examples/python/`
+
+As the CI examples job runs it, from the repository root:
+
+```bash
+python -m pip install --require-hashes -r .github/requirements/ci-dev-py3.txt
+( cd bindings/python && maturin build --release --out dist )
+python -m pip install --no-index --find-links bindings/python/dist wickra-compile
+python examples/python/compile.py
+```
+
+| Example | What it does |
+| --- | --- |
+| `compile.py` | A runnable Python example: compile a strategy spec (dry run) and print its |
+
+## Node.js — `examples/node/`
+
+As the CI examples job runs it, from the repository root:
+
+```bash
+( cd bindings/node && npm install --no-audit --no-fund && npx napi build --platform --release )
+( cd examples/node && npm install --no-audit --no-fund )
+node examples/node/compile.js
+```
+
+| Example | What it does |
+| --- | --- |
+| `compile.js` | A runnable Node.js example: compile a strategy spec (dry run) and print its deterministic manifest. |
+
+## WASM — `examples/wasm/`
+
+Build the WASM package, serve the repository root, and open the page in a browser;
+the module script inside it is what runs (CI parses it with `node --check`):
+
+```bash
+wasm-pack build bindings/wasm --target web
+python -m http.server 8000     # then open http://localhost:8000/examples/wasm/
+```
+
+| Example | What it does |
+| --- | --- |
+| `compile.html` | A runnable example against this binding. |
+
+## Example datasets
+
+The examples read from [`examples/data/`](data/): . The
+cross-language golden fixtures, which every binding is checked against byte for
+byte, live in [`../golden/`](../golden).
 
 ## Run them
 

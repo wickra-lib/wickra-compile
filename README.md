@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://wickra.org"><img src="https://raw.githubusercontent.com/wickra-lib/.github/main/profile/wickra-banner.webp?v=514" alt="Wickra Compile — compile a strategy spec into a standalone deployable" width="100%"></a>
+  <a href="https://wickra.org"><img src="https://raw.githubusercontent.com/wickra-lib/.github/main/profile/wickra-banner.webp?v=514-7" alt="Wickra Compile — compile a strategy spec into a standalone deployable" width="100%"></a>
 </p>
 
 [![Built on Wickra](https://img.shields.io/badge/built%20on-wickra-3b82f6)](https://github.com/wickra-lib/wickra)
@@ -19,22 +19,24 @@
 [![OpenSSF Scorecard](https://raw.githubusercontent.com/wickra-lib/.github/main/profile/badges/wickra-compile/scorecard.svg)](https://scorecard.dev/viewer/?uri=github.com/wickra-lib/wickra-compile)
 [![OpenSSF Best Practices](https://raw.githubusercontent.com/wickra-lib/.github/main/profile/badges/wickra-compile/best-practices.svg)](https://www.bestpractices.dev)
 [![Build provenance](https://raw.githubusercontent.com/wickra-lib/.github/main/profile/badges/wickra-compile/provenance.svg)](https://github.com/wickra-lib/wickra-compile/attestations)
-[![Docs](https://raw.githubusercontent.com/wickra-lib/.github/main/profile/badges/wickra-compile/docs.svg)](https://wickra.org)
+[![Docs](https://raw.githubusercontent.com/wickra-lib/.github/main/profile/badges/wickra-compile/docs.svg)](https://compile.wickra.org)
 [![Verified across 10 languages](https://raw.githubusercontent.com/wickra-lib/.github/main/profile/badges/wickra-compile/verified.svg)](golden/)
 [![Deterministic manifest](https://img.shields.io/badge/manifest-deterministic-3b82f6)](#determinism)
 
 ---
 
-# Wickra Compile
-
 **Compile a strategy spec into a standalone deployable: a WASM module, a
 self-contained binary, or a `no_std` artifact for microcontrollers. Write once
 as data, deploy anywhere.**
 
-> **Part of the [Wickra ecosystem](https://github.com/wickra-lib):** the same data-driven core and ten-language binding surface also power [wickra-exchange](https://github.com/wickra-lib/wickra-exchange), [wickra-backtest](https://github.com/wickra-lib/wickra-backtest), [wickra-terminal](https://github.com/wickra-lib/wickra-terminal) and 20 more — see [the full list](https://github.com/wickra-lib).
-> same [`StrategySpec`](https://github.com/wickra-lib/wickra-backtest) that
-> `wickra-backtest` runs and emits a self-contained project that embeds the spec
-> and calls the Wickra engine — no interpreter, no runtime spec parsing.
+> **▶ Live demos:** the backtester compiled to WebAssembly, an equity curve building bar by bar — **[backtest-live.wickra.org](https://backtest-live.wickra.org)**;
+> one StrategySpec side by side in Python, Rust, JS and Go — **[playground.wickra.org](https://playground.wickra.org)**;
+> all 514 indicators of the core over a real Binance feed — **[live.wickra.org](https://live.wickra.org)**. Zero backend, all of them.
+
+**Part of the [Wickra ecosystem](#ecosystem):** the same data-driven core and ten-language binding surface also power [wickra-exchange](https://github.com/wickra-lib/wickra-exchange), [wickra-backtest](https://github.com/wickra-lib/wickra-backtest), [wickra-terminal](https://github.com/wickra-lib/wickra-terminal) and 20 more — see [the full list](https://github.com/wickra-lib).
+same [`StrategySpec`](https://github.com/wickra-lib/wickra-backtest) that
+`wickra-backtest` runs and emits a self-contained project that embeds the spec
+and calls the Wickra engine — no interpreter, no runtime spec parsing.
 
 Wickra Compile is the **output** side of strategy authoring: instead of wrestling
 a Pine-like input language, you write your strategy as a `StrategySpec` (data),
@@ -53,9 +55,18 @@ cargo run -p wickra-compile -- --spec golden/specs/sma_cross.json --dry-run --ou
 
 ## Status
 
-Early development (0.1.0). The codegen core, the reference CLI, the
+**0.1.1 — the current release.** The codegen core, the reference CLI, the
 ten-language binding surface, the golden corpus and the full CI matrix are in
-place; 0.1.0 is the first published release.
+place.
+
+## Documentation
+
+- [ARCHITECTURE.md](docs/ARCHITECTURE.md) — the crates and the codegen pipeline.
+- [COMPILESPEC.md](docs/COMPILESPEC.md) — the input schema.
+- [TARGETS.md](docs/TARGETS.md) — WASM / binary / `no_std` and the MCU allowlist.
+- [DETERMINISM.md](docs/DETERMINISM.md) — why the manifest is reproducible.
+- [TEMPLATES.md](docs/TEMPLATES.md) — codegen and injection safety.
+- [Cookbook.md](docs/Cookbook.md) — practical recipes.
 
 ## How it works
 
@@ -110,15 +121,6 @@ print(out["manifest"]["project_hash"])  # identical in every binding
 
 See [`examples/`](examples/) for the same program in all ten languages.
 
-## Documentation
-
-- [ARCHITECTURE.md](docs/ARCHITECTURE.md) — the crates and the codegen pipeline.
-- [COMPILESPEC.md](docs/COMPILESPEC.md) — the input schema.
-- [TARGETS.md](docs/TARGETS.md) — WASM / binary / `no_std` and the MCU allowlist.
-- [DETERMINISM.md](docs/DETERMINISM.md) — why the manifest is reproducible.
-- [TEMPLATES.md](docs/TEMPLATES.md) — codegen and injection safety.
-- [Cookbook.md](docs/Cookbook.md) — practical recipes.
-
 ## Project layout
 
 ```
@@ -171,12 +173,6 @@ Run the suites with the commands in
 - **Fuzz** — `fuzz/` holds libFuzzer targets over spec and target parsing, the
   canonical hash and the codegen; CI runs each for a short smoke.
 
-## Benchmarks
-
-Codegen is pure data templating and hashing — tens of microseconds, no
-compilation. See [BENCHMARKS.md](BENCHMARKS.md); reproduce with
-`cargo bench -p compile-bench`.
-
 ## Requirements
 
 - **Rust 1.86+** — the workspace MSRV; the Node binding needs **Rust 1.88**.
@@ -192,11 +188,11 @@ compilation. See [BENCHMARKS.md](BENCHMARKS.md); reproduce with
 
 See each `bindings/<lang>/README.md` for the per-language build and install.
 
-## Security
+## Benchmarks
 
-See [SECURITY.md](SECURITY.md) and [THREAT_MODEL.md](THREAT_MODEL.md). The
-compiler generates code and can invoke `cargo` on it — run it only on trusted
-specs.
+Codegen is pure data templating and hashing — tens of microseconds, no
+compilation. See [BENCHMARKS.md](BENCHMARKS.md); reproduce with
+`cargo bench -p compile-bench`.
 
 ## Ecosystem
 
@@ -235,17 +231,28 @@ in-browser demo at [wickra.org](https://wickra.org).
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## Security
+
+See [SECURITY.md](SECURITY.md) and [THREAT_MODEL.md](THREAT_MODEL.md). The
+compiler generates code and can invoke `cargo` on it — run it only on trusted
+specs.
+
 ## License
 
-Dual-licensed under either of
+Licensed under either of
 
-- Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE))
-- MIT license ([LICENSE-MIT](LICENSE-MIT))
+- Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE) or
+  <http://www.apache.org/licenses/LICENSE-2.0>)
+- MIT license ([LICENSE-MIT](LICENSE-MIT) or <http://opensource.org/licenses/MIT>)
 
-at your option. Unless you explicitly state otherwise, any contribution
-intentionally submitted for inclusion in this work, as defined in the Apache-2.0
-license, shall be dual-licensed as above, without any additional terms or
-conditions.
+at your option. Use it, fork it, modify it, redistribute it — commercially or
+not — file issues, send pull requests; all welcome.
+
+### Contribution
+
+Unless you explicitly state otherwise, any contribution intentionally submitted
+for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
+dual licensed as above, without any additional terms or conditions.
 
 ## Disclaimer
 
