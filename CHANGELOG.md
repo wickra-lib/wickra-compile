@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **wickra-backtest 0.1.6.** The engine, its core and its data crate move from
+  the `=0.1.5` pin to the release the family is on; the lock follows. A
+  cross-repo scan lined the 24 wickra-lib repositories up and the rest of this
+  entry is what this one spelled differently: the six crates that named
+  `wickra-compile-core` with their own `path` + `version = "0.1"` now inherit
+  the workspace dependency like every sibling, the fuzz job runs the family's
+  pinned `nightly-2026-07-01` rather than a rolling nightly, and the example
+  job's `dotnet-version` reads `8.0.x`.
+
 ### Fixed
 
 - **The Java binding loads the library it ships.** The jar carries the native
