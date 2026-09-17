@@ -29,5 +29,5 @@ workspace = true
 # (which shells out to `cargo`) is disabled: a browser cannot run a toolchain, so
 # pure codegen + the deterministic manifest is all that is exposed. A real build
 # (`compile` with `dry_run: false`) comes back as an in-band error instead.
-wickra-compile-core = { path = "../../crates/compile-core", version = "0.1", default-features = false }
+wickra-compile-core = { workspace = true, default-features = false }
 wasm-bindgen = "0.2"
