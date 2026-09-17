@@ -37,7 +37,7 @@ The output lands in `pkg/`.
 ## Quick start
 
 ```js
-import init, { Compiler } from "./pkg/wickra_compile_wasm.js";
+import init, { Compiler } from "wickra-compile-wasm";
 
 await init();
 
