@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Family pins follow the owners' releases:** wickra-backtest =0.1.6 -> =0.1.7. No code of this repository changes; the engine it links is the one those releases ship.
 - **wickra-backtest 0.1.6.** The engine, its core and its data crate move from
   the `=0.1.5` pin to the release the family is on; the lock follows. A
   cross-repo scan lined the 24 wickra-lib repositories up and the rest of this
