@@ -24,7 +24,7 @@ Node loader the current napi-rs CLI generates.
 ### Changed
 
 - **Built on wickra-core 1.0.5.** The lock takes the indicator core's latest
-  release; the `1.0` requirement already admitted it.
+  release, reached through `wickra-backtest`; nothing here names it.
 - **Third-party dependencies refreshed.** `Cargo.lock` takes 19 crates to their
   newest semver-compatible versions, run across the family in one pass. No
   manifest changed.
