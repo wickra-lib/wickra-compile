@@ -15,7 +15,7 @@ members = [
 exclude = ["fuzz"]
 
 [workspace.package]
-version = "0.1.2"
+version = "0.1.3"
 edition = "2021"
 rust-version = "1.86"
 license = "MIT OR Apache-2.0"
@@ -24,7 +24,7 @@ authors = ["wickra-lib"]
 
 [workspace.dependencies]
 # Workspace-internal crate, referenced by the CLI, bench, example and bindings.
-wickra-compile-core = { version = "0.1.2", path = "crates/compile-core" }
+wickra-compile-core = { version = "0.1.3", path = "crates/compile-core" }
 serde = { version = "1", features = ["derive"] }
 # float_roundtrip: serde_json's default float parser is fast and may be a ULP
 # off, so a number printed by the canonicaliser could re-parse to a neighbour
