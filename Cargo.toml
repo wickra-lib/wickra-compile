@@ -39,7 +39,7 @@ clap = { version = "4", features = ["derive"] }
 # The engine the compiler validates a StrategySpec against, from crates.io and
 # pinned exactly, as the released siblings pin it: a newer patch on one side
 # must not leave two copies of the engine in one graph.
-wickra-backtest = "=0.1.7"
+wickra-backtest = "=0.1.8"
 cbindgen = "0.27"
 # codspeed-criterion-compat is a drop-in for criterion: the benches keep their
 # criterion API and run as criterion locally, but under `cargo codspeed` they
