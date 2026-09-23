@@ -10,7 +10,7 @@
     <AssemblyName>Wickra.Compile</AssemblyName>
 
     <PackageId>Wickra.Compile</PackageId>
-    <Version>0.1.2</Version>
+    <Version>0.1.3</Version>
     <Authors>kingchenc</Authors>
     <Description>Compile a Wickra strategy spec into a standalone deployable for .NET over the Wickra C ABI: a spec produces a byte-identical manifest and generated project across every language binding.</Description>
     <PackageLicenseExpression>MIT OR Apache-2.0</PackageLicenseExpression>

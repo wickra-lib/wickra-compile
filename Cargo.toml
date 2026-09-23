@@ -15,7 +15,7 @@ members = [
 exclude = ["fuzz"]
 
 [workspace.package]
-version = "0.1.2"
+version = "0.1.3"
 edition = "2021"
 rust-version = "1.86"
 license = "MIT OR Apache-2.0"
@@ -24,7 +24,7 @@ authors = ["wickra-lib"]
 
 [workspace.dependencies]
 # Workspace-internal crate, referenced by the CLI, bench, example and bindings.
-wickra-compile-core = { version = "0.1.2", path = "crates/compile-core" }
+wickra-compile-core = { version = "0.1.3", path = "crates/compile-core" }
 serde = { version = "1", features = ["derive"] }
 # float_roundtrip: serde_json's default float parser is fast and may be a ULP
 # off, so a number printed by the canonicaliser could re-parse to a neighbour
@@ -39,7 +39,7 @@ clap = { version = "4", features = ["derive"] }
 # The engine the compiler validates a StrategySpec against, from crates.io and
 # pinned exactly, as the released siblings pin it: a newer patch on one side
 # must not leave two copies of the engine in one graph.
-wickra-backtest = "=0.1.7"
+wickra-backtest = "=0.1.8"
 cbindgen = "0.27"
 # codspeed-criterion-compat is a drop-in for criterion: the benches keep their
 # criterion API and run as criterion locally, but under `cargo codspeed` they
