@@ -3,7 +3,7 @@ message: "If you use this software, please cite it as below."
 title: "wickra-compile"
 abstract: >-
   A deterministic multi-symbol feature store built on the Wickra core: a
-  data-driven FeatureSpec is folded over each symbol's history with 514 O(1)
+  data-driven FeatureSpec is folded over each symbol's history with 495 O(1)
   streaming indicators, labels are joined over a forward horizon, and the result
   is materialized as a feature matrix, exposed as a JSON-over-C-ABI data API in
   ten languages.
