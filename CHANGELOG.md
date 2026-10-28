@@ -20,6 +20,14 @@ A maintenance release: the compiler and the firmware it emits are unchanged.
   wickra-radar entry names what radar scans -- open interest, funding,
   order-book and liquidation events -- since it resolves no indicator.
 
+### Fixed
+
+- **`central-publishing-maven-plugin` 0.12.0** for the Java binding. Since
+  early October the GitHub runners carry Maven 3.10.0, which writes
+  `maven-metadata-local.xml` and `_remote.repositories` into the staging
+  directory; 0.11.0 bundles them, and Central rejects the deployment with
+  "Bundle has content that does NOT have a .pom file".
+
 ## [0.2.0] - 2026-10-06
 
 A follow-up release on the wickra 2.0 family.
