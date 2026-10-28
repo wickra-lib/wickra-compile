@@ -13,6 +13,14 @@ A maintenance release: the compiler and the firmware it emits are unchanged.
 
 ### Changed
 
+- **Built on wickra-core 2.1.0.** The lock takes the indicator core's minor
+  release, reached through the family crates; the `2.0` requirement already
+  admitted it. It adds `RunningDrawdown` and updates `MaxDrawdown` in amortised
+  O(1) with the same values; nothing here computes differently.
+- **The family pins follow the owners' releases.** `wickra-backtest` =0.2.0 ->
+  =0.2.1 -- the exact pins this repository keeps on its siblings move to the
+  versions those repositories release in the same train, and every tracked
+  lockfile follows.
 - **uv 0.13.5** for the lockfile bootstrap in `scripts/update-lockfiles.sh`.
 - **The ecosystem list quotes the backtest registry's count** (495) for the
   products that resolve indicators through it, and `CITATION.cff` states 495 as
