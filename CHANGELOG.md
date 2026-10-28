@@ -7,6 +7,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-10-28
+
+A maintenance release: the compiler and the firmware it emits are unchanged.
+
+### Changed
+
+- **Built on wickra-core 2.1.0.** The lock takes the indicator core's minor
+  release, reached through the family crates; the `2.0` requirement already
+  admitted it. It adds `RunningDrawdown` and updates `MaxDrawdown` in amortised
+  O(1) with the same values; nothing here computes differently.
+- **The family pins follow the owners' releases.** `wickra-backtest` =0.2.0 ->
+  =0.2.1 -- the exact pins this repository keeps on its siblings move to the
+  versions those repositories release in the same train, and every tracked
+  lockfile follows.
+- **uv 0.13.5** for the lockfile bootstrap in `scripts/update-lockfiles.sh`.
+- **The ecosystem list quotes the backtest registry's count** (495) for the
+  products that resolve indicators through it, and `CITATION.cff` states 495 as
+  well: a compiled strategy resolves its indicators through that registry. The
+  wickra-radar entry names what radar scans -- open interest, funding,
+  order-book and liquidation events -- since it resolves no indicator.
+
+### Fixed
+
+- **`central-publishing-maven-plugin` 0.12.0** for the Java binding. Since
+  early October the GitHub runners carry Maven 3.10.0, which writes
+  `maven-metadata-local.xml` and `_remote.repositories` into the staging
+  directory; 0.11.0 bundles them, and Central rejects the deployment with
+  "Bundle has content that does NOT have a .pom file".
+
 ## [0.2.0] - 2026-10-06
 
 A follow-up release on the wickra 2.0 family.
@@ -287,7 +316,8 @@ Node loader the current napi-rs CLI generates.
   `DETERMINISM.md`, `TEMPLATES.md`, `Cookbook.md`, per-binding READMEs, and
   measured `BENCHMARKS.md` figures.
 
-[Unreleased]: https://github.com/wickra-lib/wickra-compile/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/wickra-lib/wickra-compile/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/wickra-lib/wickra-compile/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/wickra-lib/wickra-compile/compare/v0.1.4...v0.2.0
 [0.1.4]: https://github.com/wickra-lib/wickra-compile/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/wickra-lib/wickra-compile/compare/v0.1.2...v0.1.3
