@@ -12,6 +12,10 @@ bindings/r/.rlib/
 bindings/r/..Rcheck/
 **/*.node
 __pycache__
+# The extension `maturin develop` builds into the Python package; wheels are
+# built in CI and never committed.
+bindings/python/python/**/*.pyd
+bindings/python/python/**/*.so
 bindings/wasm/pkg/
 bindings/wasm/pkg-node/
 dist
