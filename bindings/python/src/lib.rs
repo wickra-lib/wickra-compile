@@ -49,7 +49,8 @@ impl PyCompiler {
 
 /// The native module (`wickra_compile._wickra_compile`).
 #[pymodule]
-fn _wickra_compile(module: &Bound<'_, PyModule>) -> PyResult<()> {
+#[pyo3(name = "_wickra_compile")]
+fn wickra_compile_extension(module: &Bound<'_, PyModule>) -> PyResult<()> {
     module.add("__version__", env!("CARGO_PKG_VERSION"))?;
     module.add_class::<PyCompiler>()?;
     Ok(())
